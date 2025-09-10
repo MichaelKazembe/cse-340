@@ -1,6 +1,130 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+/* Import Montserrat */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+/* Variables */
+:root {
+  --primary-text: #242333;
+  --primary-background: #f4f4f4;
+  --body-font: sans-serif;
+  --body-font-size: smaller;
+  --body-font-color: #333;
+  --heading-font: "Montserrat", sans-serif;
+  --main-accent: #01b0d3;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--body-font);
+  color: var(--primary-text);
+  background-color: var(--primary-background);
+  margin: 2rem;
+  padding: 0;
+}
+
+* {
   box-sizing: border-box;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+button {
+  background-color: var(--main-accent);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0192ad;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  color: var(--primary-text);
+  margin-bottom: 1rem;
+}
+
+/* Paragraphs */
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: smaller;
+  color: var(--body-font-color);
+}
+
+/* Lists */
+ul,
+ol {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  text-decoration: none;
+  list-style: none;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Header */
+#top-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary-text);
+}
+
+#top-header a {
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
+.siteName {
+  font-family: var(--heading-font);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Navigation */
+nav {
+  margin-bottom: 2rem;
+  background-color: var(--main-accent);
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.navigation {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation li {
+  cursor: pointer;
+}
+
+.navigation li:hover {
+  text-decoration: underline;
+  color: var(--primary-background);
 }
