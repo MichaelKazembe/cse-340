@@ -1,3 +1,7 @@
+## View the Website on Render
+
+You can view the deployed project at: [https://cse340-a43k.onrender.com](https://cse340-a43k.onrender.com)
+
 ## Getting Started
 
 This document is intended to get you started quickly in building a backend driven Node.js application complete with pages and content, backend logic and a PostgreSQL database for data storage.
