@@ -10,6 +10,8 @@
   --body-font-color: #333;
   --heading-font: "Montserrat", sans-serif;
   --main-accent: #01b0d3;
+  --secondaary-accent: #0192ad;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* Global Styles */
@@ -17,8 +19,8 @@ body {
   font-family: var(--body-font);
   color: var(--primary-text);
   background-color: var(--primary-background);
-  margin: 2rem;
-  padding: 0;
+  margin: 0;
+  padding: 1rem;
 }
 
 * {
@@ -37,7 +39,8 @@ a:hover {
 /* Buttons */
 button {
   background-color: var(--main-accent);
-  color: #fff;
+  color: var(--body-font-color);
+  font-weight: 600;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -45,7 +48,7 @@ button {
 }
 
 button:hover {
-  background-color: #0192ad;
+  background-color: var(--secondaary-accent);
 }
 
 /* Headings */
@@ -106,7 +109,7 @@ li {
 
 /* Navigation */
 nav {
-  margin-bottom: 2rem;
+  margin: 2rem 0;
   background-color: var(--main-accent);
   padding: 1rem;
   font-weight: 600;
@@ -131,15 +134,111 @@ nav {
 }
 
 /* Hero Section */
-#hero {
+#hero-section {
   background-image: url("../images/vehicles/delorean.jpg");
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center;
-  height: 600px;
+  background-position: right;
+  height: 300px;
   color: var(--primary-background);
-  padding: 2rem;
+  padding: 0.5rem;
   text-align: center;
-  border-radius: 8px;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.hero-list {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: var(--primary-text);
+  list-style: none;
+  width: auto;
+  padding: 1rem;
+  margin: 0;
+  position: absolute;
+  top: 46px;
+  text-align: left;
+  left: 4px;
+}
+
+.hero-list h2,
+h3 {
+  color: var(--secondaary-accent);
+}
+
+/* Review section */
+
+.reviews-list li:before {
+  content: "★  ";
+  color: var(--main-accent);
+  font-size: small;
+}
+
+/* Upgrades Section */
+.upgrades-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
   margin-bottom: 2rem;
+}
+
+.upgrade-card {
+  display: block;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--box-shadow);
+  background: #fff;
+  padding: 0;
+}
+
+.upgrade-card:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+
+.add-col {
+  border-radius: 8px 8px 0 0;
+  padding: 0.5rem;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.add-col .image {
+  background: var(--main-accent);
+  padding: 1rem;
+  height: 100px;
+  width: 100%;
+}
+
+.add-col img {
+  background-color: var(--primary-background);
+  max-width: 100%;
+  max-height: 100px;
+  margin-bottom: 1rem;
+}
+.upgrade-caption {
+  margin: 0.5rem 0 0 0;
+  color: var(--primary-text);
+  font-size: small;
+  font-weight: 600;
+  background: none;
+  padding-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--primary-text);
+  margin-top: 2rem;
+  font-size: smaller;
+}
+
+footer p {
+  margin: 0;
+  color: var(--primary-background);
 }
