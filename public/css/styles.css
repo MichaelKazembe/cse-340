@@ -137,10 +137,10 @@ nav {
 #hero-section {
   background-image: url("../images/vehicles/delorean.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
+  background-size: initial;
+  background-position: center;
   height: 300px;
-  color: var(--primary-background);
+  background-color: var(--primary-background);
   padding: 0.5rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -241,4 +241,36 @@ footer {
 footer p {
   margin: 0;
   color: var(--primary-background);
+}
+/* Media Queries */
+
+/* Large Devices */
+@media (min-width: 769px) and (max-width: 1440px) {
+  #hero-section {
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    width: 100%;
+    position: relative;
+  }
+  .hero-list {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+  }
+}
+
+/* Tablets Devices */
+@media (max-width: 768px) {
+  #hero-section {
+    background-size: cover;
+    background-position: center;
+    height: 250px;
+    width: 100%;
+  }
+  .hero-list {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+  }
 }
