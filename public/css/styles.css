@@ -15,11 +15,22 @@
 }
 
 /* Global Styles */
+
+html {
+  background-image: url("../images/site/small_check.png");
+  background-repeat: repeat;
+  background-size: contain;
+  background-position: center;
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--body-font);
   color: var(--primary-text);
   background-color: var(--primary-background);
-  margin: 0;
+  border: 2px solid var(--main-accent);
+  border-radius: 1rem;
+  margin: 1rem;
   padding: 1rem;
 }
 
@@ -137,10 +148,10 @@ nav {
 #hero-section {
   background-image: url("../images/vehicles/delorean.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
+  background-size: initial;
+  background-position: center;
   height: 300px;
-  color: var(--primary-background);
+  background-color: var(--primary-background);
   padding: 0.5rem;
   text-align: center;
   margin-bottom: 1rem;
@@ -241,4 +252,62 @@ footer {
 footer p {
   margin: 0;
   color: var(--primary-background);
+}
+/* Media Queries */
+
+/* Large Devices */
+@media (min-width: 769px) and (max-width: 1440px) {
+  html {
+    background-image: url("../images/site/checkerboard.jpg");
+    background-size: initial;
+    background-repeat: repeat;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 2rem;
+    justify-content: space-evenly;
+    margin: 0 2rem;
+  }
+
+  .content > section {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  #hero-section {
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    width: 100%;
+    position: relative;
+  }
+  .hero-list {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+  }
+
+  .upgrades-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-evenly;
+  }
+}
+
+/* Tablets Devices */
+@media (max-width: 768px) {
+  #hero-section {
+    background-size: cover;
+    background-position: center;
+    height: 250px;
+    width: 100%;
+  }
+  .hero-list {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+  }
 }
