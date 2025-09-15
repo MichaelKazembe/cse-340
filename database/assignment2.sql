@@ -1,6 +1,6 @@
 -- TASK ONE - Write SQL Statements
 
--- Insert a new record to table 'account'
+-- 1. Insert a new record to table 'account'
 
 INSERT INTO public.account (
 	account_firstname,
@@ -13,18 +13,29 @@ VALUES (
 	'Tony',
 	'Stark',
 	'tony@starkent.com',
-	'Iam1ronM@n',
-	'Admin'
+	'Iam1ronM@n'
 );
 
--- Delete the Tony Stark record from table 'account'
+-- 2. Modify the Tony Stark record to change  account_type to 'Admin'
 
-DELETE FROM public.account
-WHERE account_firstname = 'Tony' AND account_lastname = 'Stark';
+UPDATE 
+    public.account
+SET 
+    account_type = 'Admin'
+WHERE 
+    account_id = 1;
 
 
--- Modify the "GM Hummer" record to read "a huge interior" 
--- rather than "small interiors" using a single query
+-- 3. Delete the Tony Stark record from table 'account'
+
+DELETE FROM 
+    public.account
+WHERE 
+    account_id = 1;
+
+
+-- 4. Modify the "GM Hummer" record to read "a huge interior" 
+    -- rather than "small interiors" using a single query
 
 UPDATE
   public.inventory
