@@ -59,3 +59,12 @@ INNER JOIN
     ON public.inventory.classification_id = public.classification.classification_id
 WHERE
     classification_name = 'Sport'; 
+
+-- 6. Update all records in the inventory tables to add "/vehicles" to the middle
+    -- of the path in the inv_image and inv_thumbnail columns using a single query
+
+UPDATE
+    public.inventory
+SET
+    inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
