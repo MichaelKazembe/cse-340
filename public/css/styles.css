@@ -135,11 +135,17 @@ nav {
   padding: 0;
 }
 
-.navigation li {
+.navigation a {
   cursor: pointer;
 }
 
-.navigation li:hover {
+.navigation a {
+  color: var(--primary-text);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.navigation a:hover {
   text-decoration: underline;
   color: var(--primary-background);
 }
