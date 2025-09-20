@@ -18,3 +18,5 @@ invCont.buildByClassificationId = async function (req, res, next) {
     grid,
   });
 };
+
+module.exports = invCont; // Export the controller object to be used in routes
