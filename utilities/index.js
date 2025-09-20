@@ -12,7 +12,7 @@ Util.getNav = async function (req, res, next) {
     // for each classification row
     list += "<li>"; // open a list item
     list +=
-      '<a href="/inv/type/' +
+      '<a href="/inv/type/#' +
       row.classification_id +
       '" title="See our inventory of ' +
       row.classification_name +
