@@ -9,6 +9,26 @@ async function getClassifications() {
   );
 }
 
+/* ***************************
+ *  Get all inventory items and classification_name by classification_id
+ * ************************** */
+async function getInventoryByClassificationId(classification_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory AS i
+      JOIN public.classification AS c
+      ON i.classification_id = c.classification_id
+      WHERE i.classification_id = $1`,
+      [classification_id]
+    );
+    console.log(data.rows);
+    return data.rows; // Return only the rows from the query result
+  } catch (error) {
+    console.log("getClassificationById error " + error);
+  }
+}
+
 module.exports = {
-  getClassifications,
+  getClassifications, // Export the functions to be used in baseController.js
+  getInventoryByClassificationId, // Export the functions to be used in invController.js
 };
