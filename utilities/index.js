@@ -6,7 +6,6 @@ const Util = {}; // container for all utility functions
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications(); // get the array of classifications
-  console.log(data); // logs the array of objects to the terminal
   let list = "<ul class='navigation'>"; // start the list
   list += '<li><a href="/" title="Home Page">Home</a></li>';
   data.rows.forEach((row) => {
