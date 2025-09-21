@@ -30,6 +30,10 @@ app.use(static); // Static route for CSS and JS
 app.use("/inv", inventoryRoute); // Inventory route for /inv
 // index route
 app.get("/", baseController.buildHome);
+// File Not Found Route - must be last route
+app.use(async (req, res, next) => {
+  next({ status: 404, message: "Sorry, we appear to have lost that page." });
+});
 
 /* ***********************
  * Express Error Handler
