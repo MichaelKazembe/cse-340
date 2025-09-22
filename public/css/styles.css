@@ -10,8 +10,9 @@
   --body-font-color: #333;
   --heading-font: "Montserrat", sans-serif;
   --main-accent: #01b0d3;
-  --secondaary-accent: #0192ad;
-  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --secondary-accent: #0192ad;
+  --box-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --box-shadow-lg: 0 2px 8px rgba(1, 176, 211, 0.1);
 }
 
 /* Global Styles */
@@ -59,7 +60,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--secondaary-accent);
+  background-color: var(--secondary-accent);
 }
 
 /* Headings */
@@ -179,7 +180,7 @@ nav {
 
 .hero-list h2,
 h3 {
-  color: var(--secondaary-accent);
+  color: var(--secondary-accent);
 }
 
 /* Review section */
@@ -245,6 +246,159 @@ h3 {
   background: none;
   padding-bottom: 0.5rem;
 }
+/* End Upgrades Section */
+
+/* Vehicle Cards Grid */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 0;
+  margin: 2rem 0;
+  list-style: none;
+}
+
+#inv-display li {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+#inv-display li:hover {
+  box-shadow: 0 6px 24px rgba(1, 176, 211, 0.15);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.namePrice {
+  width: 100%;
+  text-align: center;
+}
+.namePrice h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  font-weight: 700;
+  color: var(--main-accent);
+}
+
+.namePrice h2 a {
+  color: var(--secondary-accent);
+}
+
+.namePrice span {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-text);
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  #inv-display {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+/* End Vehicle Cards Grid */
+
+/* Car Detail View Styles */
+.car-detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  padding: 2rem 1rem;
+  margin: 2rem 0;
+}
+.car-detail-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.car-detail-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow-lg);
+}
+.car-detail-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.car-title {
+  margin-bottom: 1rem;
+}
+.car-detail-list {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.car-detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.car-label {
+  color: var(--body-font-color);
+}
+.car-value {
+  color: var(--body-font-color);
+}
+.car-description {
+  width: 100%;
+  background: var(--primary-background);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.car-description h3 {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .car-detail-grid {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 2rem;
+  }
+  .car-detail-image {
+    flex: 1 1 350px;
+    max-width: 600px;
+    margin-right: 2rem;
+  }
+  .car-detail-info {
+    flex: 2 1 400px;
+    min-width: 300px;
+    padding-left: 2rem;
+  }
+}
+/* End Detail View Styles */
+
+/* Error Heading and Message Styles */
+.error-heading {
+  text-align: center;
+  color: var(--secondary-accent);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
+.error-message {
+  text-align: center;
+  color: var(--primary-text);
+  font-size: 1.5rem;
+  margin-bottom: 12rem;
+}
+/* End Error Heading and Message Styles */
 
 /* Footer */
 footer {

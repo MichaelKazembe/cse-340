@@ -34,20 +34,8 @@ Util.buildClassificationGrid = async function (data) {
     grid = '<ul id="inv-display">';
     data.forEach((vehicle) => {
       grid += "<li>";
-      grid +=
-        '<a href="../../inv/detail/' +
-        vehicle.inv_id +
-        '" title="View ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        'details"><img src="' +
-        vehicle.inv_thumbnail +
-        '" alt="Image of ' +
-        vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
-        ' on CSE Motors" /></a>';
+      grid += '<img src="' + vehicle.inv_thumbnail + '" alt="Image of ';
+      grid += vehicle.inv_make + " " + vehicle.inv_model + '">';
       grid += '<div class="namePrice">';
       grid += "<hr />";
       grid += "<h2>";
@@ -56,12 +44,8 @@ Util.buildClassificationGrid = async function (data) {
         vehicle.inv_id +
         '" title="View ' +
         vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
         ' details">' +
         vehicle.inv_make +
-        " " +
-        vehicle.inv_model +
         "</a>";
       grid += "</h2>";
       grid +=
@@ -73,17 +57,55 @@ Util.buildClassificationGrid = async function (data) {
     });
     grid += "</ul>";
   } else {
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+    grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
   return grid;
 };
 
-/* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for
- * General Error Handling
- **************************************** */
-Util.handleErrors = (fn) => (req, res, next) =>
-  Promise.resolve(fn(req, res, next)).catch(next);
+/* **************************************
+ * Build the inventory detail view HTML
+ * ************************************ */
+Util.buildDetailViewHtml = async function (data) {
+  let detail;
+  if (data.length > 0) {
+    const vehicle = data[0];
+    const price =
+      vehicle.inv_price !== undefined && vehicle.inv_price !== null
+        ? new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(vehicle.inv_price)
+        : "N/A";
+    const milage =
+      vehicle.inv_miles !== undefined && vehicle.inv_miles !== null
+        ? new Intl.NumberFormat("en-US").format(vehicle.inv_miles)
+        : "N/A";
+    detail = `
+      <div class="car-detail-grid">
+        <div class="car-detail-image">
+          <img src="${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model}" />
+        </div>
+        <div class="car-detail-info">
+          <h2 class="car-title">${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h2>
+          <div class="car-detail-list">
+            <div class="car-detail-row"><span class="car-label">Price:</span> <span class="car-value">${price}</span></div>
+            <div class="car-detail-row"><span class="car-label">Mileage:</span> <span class="car-value">${milage} miles</span></div>
+            <div class="car-detail-row"><span class="car-label">Color:</span> <span class="car-value">${vehicle.inv_color}</span></div>
+            <div class="car-detail-row"><span class="car-label">Year:</span> <span class="car-value">${vehicle.inv_year}</span></div>
+          </div>
+          <div class="car-description">
+            <h3>Description</h3>
+            <p>${vehicle.inv_description}</p>
+          </div>
+        </div>
+      </div>
+    `;
+    return detail;
+  } else {
+    detail = '<p class="notice">Sorry, no matching vehicle could be found.</p>';
+    return detail;
+  }
+};
+
 
 module.exports = Util;

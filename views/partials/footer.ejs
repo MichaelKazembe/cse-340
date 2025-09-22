@@ -1,5 +1,10 @@
-<% const d = new Date()
-let year = d.getFullYear() %>
+<% const d = new Date(); const year = d.getFullYear(); %>
 <footer>
-    <p class="copyright">&copy; <%= year %> CSE 340 App</p>
+  <p class="copyright">&copy; <%= year %> CSE 340 App</p>
+  <a
+    href="/error-test/trigger-error"
+    class="btn"
+    style="margin-top: 1rem; display: inline-block; color: #01b0d3"
+    >Trigger 505 Error</a
+  >
 </footer>
