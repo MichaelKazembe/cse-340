@@ -14,6 +14,7 @@ const static = require("./routes/static");
 const utilities = require("./utilities");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const errorTestRoute = require("./routes/errorTestRoute");
 
 /* ***********************
  * View Engine Templates
@@ -34,6 +35,8 @@ app.get("/", baseController.buildHome);
 app.use(async (req, res, next) => {
   next({ status: 404, message: "Sorry, we appear to have lost that page." });
 });
+// Error Test Route
+app.use("/error-test", errorTestRoute); // Route to test error handling
 
 /* ***********************
  * Express Error Handler
