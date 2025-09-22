@@ -81,9 +81,9 @@ Util.buildClassificationGrid = async function (data) {
 /* **************************************
  * Build the inventory detail view HTML
  * ************************************ */
-Util.buildDetailViewHtml = async function (data){
+Util.buildDetailViewHtml = async function (data) {
   let detail;
-  if (data.length > 0){
+  if (data.length > 0) {
     const vehicle = data[0];
     // Format the price and Milage
     const price = new Intl.NumberFormat("en-US").format(vehicle.inv_price);
@@ -106,7 +106,7 @@ Util.buildDetailViewHtml = async function (data){
   } else {
     detail = '<p class="notice">Sorry, no matching vehicle could be found.</p>';
     return detail;
-  };
+  }
 };
 
 module.exports = Util;

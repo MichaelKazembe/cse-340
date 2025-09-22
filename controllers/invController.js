@@ -22,7 +22,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
 /* ***************************
  *  Build inventory detail view
  * ************************** */
-invCont.buildDetailView = async function (req, res, next){
+invCont.buildDetailView = async function (req, res, next) {
   const inv_id = req.params.invId; // Get inventory ID from the URL
   const data = await invModel.getInventoryById(inv_id); // Fetch inventory data based on inventory ID
   console.table(data); // Log the data for debugging
@@ -33,7 +33,7 @@ invCont.buildDetailView = async function (req, res, next){
     title: vehicleName,
     nav,
     detail,
-  })
+  });
 };
 
 module.exports = invCont; // Export the controller object to be used in routes
