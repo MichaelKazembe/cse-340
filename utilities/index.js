@@ -107,4 +107,5 @@ Util.buildDetailViewHtml = async function (data) {
   }
 };
 
+
 module.exports = Util;
