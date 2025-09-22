@@ -10,8 +10,9 @@
   --body-font-color: #333;
   --heading-font: "Montserrat", sans-serif;
   --main-accent: #01b0d3;
-  --secondaary-accent: #0192ad;
-  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --secondary-accent: #0192ad;
+  --box-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --box-shadow-lg: 0 2px 8px rgba(1, 176, 211, 0.1);
 }
 
 /* Global Styles */
@@ -59,7 +60,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--secondaary-accent);
+  background-color: var(--secondary-accent);
 }
 
 /* Headings */
@@ -179,7 +180,7 @@ nav {
 
 .hero-list h2,
 h3 {
-  color: var(--secondaary-accent);
+  color: var(--secondary-accent);
 }
 
 /* Review section */
@@ -284,7 +285,7 @@ h3 {
 }
 
 .namePrice h2 a {
-  color: var(--main-accent);
+  color: var(--secondary-accent);
 }
 
 .namePrice span {
@@ -324,7 +325,7 @@ h3 {
   max-width: 100%;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(1, 176, 211, 0.1);
+  box-shadow: var(--box-shadow-lg);
 }
 .car-detail-info {
   width: 100%;
@@ -334,7 +335,6 @@ h3 {
   align-items: flex-start;
 }
 .car-title {
-  color: var(--main-accent);
   margin-bottom: 1rem;
 }
 .car-detail-list {
@@ -348,12 +348,10 @@ h3 {
   margin-bottom: 0.5rem;
 }
 .car-label {
-  font-weight: 600;
-  color: var(--primary-text);
+  color: var(--body-font-color);
 }
 .car-value {
-  color: var(--main-accent);
-  font-weight: 600;
+  color: var(--body-font-color);
 }
 .car-description {
   width: 100%;
@@ -364,7 +362,6 @@ h3 {
 }
 .car-description h3 {
   margin-top: 0;
-  color: var(--main-accent);
 }
 
 @media (min-width: 768px) {
