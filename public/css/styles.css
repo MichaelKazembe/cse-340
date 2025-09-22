@@ -245,6 +245,42 @@ h3 {
   background: none;
   padding-bottom: 0.5rem;
 }
+/* End Upgrades Section */
+
+/* Detail Section */
+.detail-card {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  box-shadow: var(--box-shadow);
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.detail-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+}
+.detail-info {
+  padding: 1rem;
+}
+.detail-info h2 {
+  margin-top: 0;
+  color: var(--primary-text);
+}
+.detail-info p {
+  color: var(--body-font-color);
+  line-height: 1.4;
+}
+.detail-info .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--main-accent);
+  margin-top: 1rem;
+}
+/* End Detail Section */
 
 /* Footer */
 footer {
