@@ -383,6 +383,23 @@ h3 {
 }
 /* End Detail View Styles */
 
+/* Error Heading and Message Styles */
+.error-heading {
+  text-align: center;
+  color: var(--main-accent);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.error-message {
+  text-align: center;
+  color: var(--primary-text);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+/* End Error Heading and Message Styles */
+
 /* Footer */
 footer {
   text-align: center;
