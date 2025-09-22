@@ -11,7 +11,7 @@ const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
-const utilities = require("./utilities/");
+const utilities = require("./utilities");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const errorTestRoute = require("./routes/errorTestRoute");
@@ -30,7 +30,7 @@ app.use(static); // Static route for CSS and JS
 // Inventory routes
 app.use("/inv", inventoryRoute); // Inventory route for /inv
 // Home/index route
-app.get("/", utilities.handleErrors.(baseController.buildHome);
+app.get("/", baseController.buildHome);
 // Error Test Route
 app.use("/error-test", errorTestRoute); // Route to test error handling
 // File Not Found Route - must be last route
