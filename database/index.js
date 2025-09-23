@@ -2,29 +2,36 @@ const { Pool } = require("pg"); // imports the pg module - PostgreSQL client for
 require("dotenv").config(); // loads environment variables from a .env file to store sensitive information like database credentials
 /* ***************
  * Connection Pool
- * SSL Object needed for local and production environments
- * Use environment variable PGSSLMODE to control SSL usage if needed
+ * SSL Object needed for local testing of app
+ * But will cause problems in production environment
+ * If - else will make determination which to use
  * *************** */
 let pool;
-const useSSL =
-  process.env.PGSSLMODE === "require" || process.env.NODE_ENV === "production";
-pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: useSSL ? { rejectUnauthorized: false } : undefined,
-});
+if (process.env.NODE_ENV == "development") {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
 
-// Consistent query helper export for all environments
-module.exports = {
-  async query(text, params) {
-    try {
-      const res = await pool.query(text, params);
-      if (process.env.NODE_ENV !== "production") {
+  // Added for troubleshooting queries
+  // during development
+  module.exports = {
+    async query(text, params) {
+      try {
+        const res = await pool.query(text, params);
         console.log("executed query", { text });
+        return res;
+      } catch (error) {
+        console.error("error in query", { text });
+        throw error;
       }
-      return res;
-    } catch (error) {
-      console.error("error in query", { text, error: error.message });
-      throw error;
-    }
-  },
-};
+    },
+  };
+} else {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+  });
+  module.exports = pool;
+}
