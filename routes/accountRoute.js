@@ -12,4 +12,4 @@ router.get("/register", accountController.buildRegister);
 // Router to register a new account
 router.post("/register", accountController.registerAccount);
 
-module.exports = router;
+module.exports = router; // Export the router to be used in server.js

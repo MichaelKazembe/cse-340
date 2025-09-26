@@ -28,7 +28,7 @@ async function buildRegister(req, res, next) {
  *  Process Registration
  * ************************ */
 
-async function processRegistration(req, res) {
+async function registerAccount(req, res) {
   let nav = await utilities.getNav();
   const {
     account_firstname,
@@ -49,11 +49,11 @@ async function processRegistration(req, res) {
       "notice",
       `Congratulations, you're registered ${account_firstname}. Please log in.`
     );
-    res.status(201).render("/account/login"),
+    res.status(201).render("account/login",
       {
         title: "Login",
         nav,
-      };
+      });
   } else {
     req.flash("notice", "Sorry, the registration failed.");
     res.status(501).render("account/register", {
@@ -64,4 +64,4 @@ async function processRegistration(req, res) {
 }
 
 // Export the controller function to be used in login, register routes
-module.exports = { buildLogin, buildRegister, processRegistration };
+module.exports = { buildLogin, buildRegister, registerAccount };
