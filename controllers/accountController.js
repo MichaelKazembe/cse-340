@@ -46,7 +46,7 @@ async function registerAccount(req, res) {
 
   if (regResult) {
     req.flash(
-      "notice",
+      "success",
       `Congratulations, you're registered ${account_firstname}. Please log in.`
     );
     res.status(201).render("account/login",
@@ -55,7 +55,7 @@ async function registerAccount(req, res) {
         nav,
       });
   } else {
-    req.flash("notice", "Sorry, the registration failed.");
+    req.flash("warning", "Sorry, the registration failed.");
     res.status(501).render("account/register", {
       title: "Register",
       nav,
