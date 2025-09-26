@@ -63,5 +63,5 @@ async function processRegistration(req, res) {
   }
 }
 
-// Export the controller function to be used in routes
+// Export the controller function to be used in login, register routes
 module.exports = { buildLogin, buildRegister, processRegistration };
