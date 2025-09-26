@@ -471,3 +471,66 @@ footer p {
     left: 10px;
   }
 }
+/* Flash Messages UI Standard */
+#messages {
+  width: 100%;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 2px solid var(--box-shadow-sm);
+  background: #f9f9f9;
+}
+#messages ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+#messages li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(1, 176, 211, 0.05);
+}
+/* Notice Message */
+#messages .notice {
+  background: #e6f0ff;
+  color: #0b3d91;
+  border-left: 4px solid #3498db;
+}
+/* Success messages */
+#messages .success {
+  background: #e6f9f3;
+  color: #1a7f5a;
+  border-left: 4px solid #01b0d3;
+}
+/* Error messages */
+#messages .error {
+  background: #ffeaea;
+  color: #b30000;
+  border-left: 4px solid #e74c3c;
+}
+/* Info messages */
+#messages .info {
+  background: #eaf4ff;
+  color: #1766a3;
+  border-left: 4px solid #3498db;
+}
+/* Warning messages */
+#messages .warning {
+  background: #fffbe6;
+  color: #a37f00;
+  border-left: 4px solid #f1c40f;
+}
+@media (max-width: 600px) {
+  #messages {
+    padding: 0.5rem;
+    font-size: 0.95rem;
+  }
+  #messages li {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+}
+/* End Flash Messages */
