@@ -15,6 +15,7 @@ const utilities = require("./utilities/");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const errorTestRoute = require("./routes/errorTestRoute");
+const accountRoute = require("./routes/accountRoute");
 const session = require("express-session");
 const pool = require("./database/");
 
@@ -51,11 +52,15 @@ app.use(function (req, res, next) {
 /* ***********************
  * Routes
  *************************/
-app.use(static); // Static route for CSS and JS
+// Account route
+app.use("/account", accountRoute);
+// Static route for CSS and JS
+app.use(static);
 // Inventory routes
 app.use("/inv", inventoryRoute); // Inventory route for /inv
 // Home/index route
 app.get("/", baseController.buildHome);
+
 // Error Test Route
 app.use("/error-test", errorTestRoute); // Route to test error handling
 // File Not Found Route - must be last route
