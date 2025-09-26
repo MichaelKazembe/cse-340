@@ -35,7 +35,7 @@ app.use(
       pool,
     }),
     secret: process.env.SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     name: "sessionId",
   })
