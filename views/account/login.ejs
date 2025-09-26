@@ -1,0 +1,16 @@
+<!-- Display title -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } %>
+<!-- Display Message -->
+<%- messages() %>
+
+<!-- Login Form -->
+<form action="/account/login" method="POST" id="login-form">
+  <label for="email">Email</label>
+  <input type="text" id="email" name="account_email" />
+  <label for="password">Password</label>
+  <input type="password" id="password" name="account_password" />
+  <button type="submit">Login</button>
+  <p>No account? <a href="/account/register">Sign-up</a></p>
+</form>

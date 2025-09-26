@@ -534,3 +534,71 @@ footer p {
   }
 }
 /* End Flash Messages */
+
+/* Login Form Modern UI */
+#login-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow-lg);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+#login-form label {
+  font-family: var(--heading-font);
+  font-weight: 600;
+  color: var(--body-font-color);
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+}
+#login-form input[type="text"],
+#login-form input[type="password"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--main-accent);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: var(--primary-background);
+  color: var(--primary-text);
+  transition: border-color 0.2s;
+}
+#login-form input:focus {
+  border-color: var(--secondary-accent);
+  outline: none;
+}
+#login-form button {
+  background: var(--main-accent);
+  color: var(--body-font-color);
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: var(--box-shadow-sm);
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+#login-form button:hover {
+  background: var(--secondary-accent);
+}
+#login-form p {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.98rem;
+}
+#login-form a {
+  color: var(--main-accent);
+  text-decoration: underline;
+  font-weight: 600;
+}
+@media (max-width: 600px) {
+  #login-form {
+    padding: 1rem;
+    max-width: 95vw;
+  }
+}
+/* End Login Form Modern UI */
