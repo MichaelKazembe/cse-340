@@ -8,6 +8,7 @@
   --body-font: sans-serif;
   --body-font-size: smaller;
   --body-font-color: #333;
+  --form-input-background: #e9e9e9;
   --heading-font: "Montserrat", sans-serif;
   --main-accent: #01b0d3;
   --secondary-accent: #0192ad;
@@ -48,21 +49,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Buttons */
-button {
-  background-color: var(--main-accent);
-  color: var(--body-font-color);
-  font-weight: 600;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: var(--secondary-accent);
-}
-
 /* Headings */
 h1,
 h2,
@@ -82,6 +68,22 @@ p {
   font-size: smaller;
   color: var(--body-font-color);
 }
+/* Buttons */
+button {
+  background-color: var(--main-accent);
+  color: var(--body-font-color);
+  font-weight: 600;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  box-shadow: var(--box-shadow-sm);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+button:hover {
+  background-color: var(--secondary-accent);
+}
+/* End Buttons */
 
 /* Lists */
 ul,
@@ -535,8 +537,8 @@ footer p {
 }
 /* End Flash Messages */
 
-/* Login Form Modern UI */
-#login-form {
+/* Login & Registration Forms */
+form {
   max-width: 400px;
   margin: 2rem auto;
   background: #fff;
@@ -547,58 +549,62 @@ footer p {
   flex-direction: column;
   gap: 1.2rem;
 }
-#login-form label {
+label {
   font-family: var(--heading-font);
   font-weight: 600;
   color: var(--body-font-color);
   margin-bottom: 0.3rem;
   font-size: 1rem;
 }
-#login-form input[type="text"],
-#login-form input[type="password"] {
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1.5px solid var(--main-accent);
   border-radius: 6px;
   font-size: 1rem;
-  background: var(--primary-background);
+  background: var(--form-input-background);
   color: var(--primary-text);
   transition: border-color 0.2s;
 }
-#login-form input:focus {
+form input:focus {
   border-color: var(--secondary-accent);
   outline: none;
 }
-#login-form button {
-  background: var(--main-accent);
-  color: var(--body-font-color);
-  font-weight: 700;
-  border: none;
-  border-radius: 6px;
+form button {
   padding: 0.75rem 1.5rem;
   font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: var(--box-shadow-sm);
   margin-top: 0.5rem;
-  transition: background 0.2s;
 }
-#login-form button:hover {
+form button:hover {
   background: var(--secondary-accent);
 }
-#login-form p {
+form p {
   text-align: center;
   margin-top: 1rem;
   font-size: 0.98rem;
 }
-#login-form a {
+form a {
   color: var(--primary-text);
   text-decoration: underline;
   font-weight: 600;
 }
+form a:hover {
+  color: var(--secondary-accent);
+}
+#registration-form .password-help {
+  display: block;
+  color: #888;
+  font-size: x-small;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+}
+
 @media (max-width: 600px) {
-  #login-form {
+  form {
     padding: 1rem;
     max-width: 95vw;
   }
 }
-/* End Login Form Modern UI */
+/* End Form */
