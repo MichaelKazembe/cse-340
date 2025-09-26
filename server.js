@@ -15,7 +15,7 @@ const utilities = require("./utilities/");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const errorTestRoute = require("./routes/errorTestRoute");
-const session = require("express-session"); 
+const session = require("express-session");
 const pool = require("./database/");
 
 /* ***********************
@@ -24,6 +24,22 @@ const pool = require("./database/");
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "./layouts/layout"); // Not at views root
+
+/* ***********************
+ * Middleware
+ *************************/
+app.use(
+  session({
+    store: new (require("connect-pg-simple")(session))({
+      createTableIfMissing: true,
+      pool,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    name: "sessionId",
+  })
+);
 
 /* ***********************
  * Routes
