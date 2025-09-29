@@ -620,11 +620,12 @@ form {
   }
 }
 
-/* Password help text for registration form */
-#registration-form .password-help {
+/* Password help text for login & registration form */
+#registration-form .password-help,
+#login-form .password-help {
   display: block;
   color: #888;
-  font-size: x-small;
+  font-size: small;
   margin-top: 0.3rem;
   margin-bottom: 1rem;
 }
