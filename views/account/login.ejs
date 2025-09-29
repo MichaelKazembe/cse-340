@@ -8,9 +8,21 @@
 <!-- Login Form -->
 <form action="/account/login" method="POST" id="login-form">
   <label for="email">Email</label>
-  <input type="text" id="email" name="account_email" />
+  <input
+    type="email"
+    id="email"
+    name="account_email"
+    title="Enter your email"
+    required
+  />
   <label for="password">Password</label>
-  <input type="password" id="password" name="account_password" />
+  <input
+    type="password"
+    id="password"
+    name="account_password"
+    title="Enter your password"
+    required
+  />
   <button type="submit">Login</button>
   <p>
     No account?
