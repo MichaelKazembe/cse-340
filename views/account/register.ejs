@@ -18,7 +18,7 @@
     type="password"
     id="password"
     name="account_password"
-    pattern="(?=^.{12,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
     title="Password must be at least 12 characters, contain a capital letter, a number, and a special character."
     required
   />
