@@ -14,30 +14,7 @@ async function buildLogin(req, res, next) {
   });
 }
 
-/* ************************
- *  Process Login
- * ************************ */
-// async function loginAccount(req, res) {
-//   let nav = await utilities.getNav();
-//   const { account_email, account_password } = req.body;
 
-//   const loginResult = await accountModel.loginAccount(
-//     account_email,
-//     account_password
-//   );
-
-//   if (loginResult) {
-//     req.flash("success", "Login successful!");
-//     res.status(200).redirect("/account/dashboard");
-//   } else {
-//     req.flash("warning", "Login failed. Please try again.");
-//     res.status(401).render("account/login", {
-//       title: "Login",
-//       nav,
-//       errors: [{ msg: "Invalid email or password." }],
-//     });
-//   }
-// }
 
 /* ************************
  *  Deliver Registration view
