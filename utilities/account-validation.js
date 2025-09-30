@@ -101,4 +101,25 @@ validate.loginRules = () => {
   ];
 };
 
+/* ************************
+ *  Check Login Data and Return Errors
+ * ************************ */
+
+validate.checkLoginData = async (req, res, next) => {
+  const { account_email } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("account/login", {
+      errors,
+      title: "Login",
+      nav,
+      account_email,
+    });
+    return;
+  }
+  next();
+};
+
 module.exports = validate; // Export the validation functions to be used in accountRoute.js
