@@ -36,4 +36,29 @@ async function checkExistingEmail(account_email) {
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail }; // Export the function to be used in accountController.js
+/* ***************************
+ *  Login account
+ * ************************** */
+async function loginAccount(account_email, account_password) {
+  try {
+    const sql = "SELECT * FROM public.account WHERE account_email = $1";
+    const accountData = await pool.query(sql, [account_email]);
+    if (accountData.rowCount === 0) {
+      return false;
+    }
+    // Compare the password provided with the hashed password stored in the database
+    const passwordMatch = await bcrypt.compare(
+      account_password,
+      accountData.rows[0].account_password
+    );
+    if (passwordMatch) {
+      return accountData.rows[0];
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return error.message;
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, loginAccount }; // Export the function to be used in accountController.js

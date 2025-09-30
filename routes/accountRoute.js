@@ -19,8 +19,13 @@ router.post(
 );
 
 // Process the login attempt
-router.post("/login", (req, res) => {
-  req.status(200).send("login process");
-});
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  (req, res) => {
+    res.status(200).send("login process");
+  }
+);
 
 module.exports = router; // Export the router to be used in server.js
