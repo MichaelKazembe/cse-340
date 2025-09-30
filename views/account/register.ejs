@@ -7,11 +7,13 @@
 
 <!-- Display Validation Errors -->
 <% if (errors) { %>
-<ul class="notice">
-  <% errors.array().forEach(error => { %>
-  <li><%= error.msg %></li>
-  <% }) %>
-</ul>
+<div id="messages">
+  <ul class="warning">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+</div>
 <% } %>
 
 <!-- Registration Form -->
