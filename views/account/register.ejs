@@ -3,7 +3,10 @@
 <h1><%= title %></h1>
 <% } %>
 <!-- Display Message -->
-<%- messages() %> <% if (errors) { %>
+<%- messages() %>
+
+<!-- Display Validation Errors -->
+<% if (errors) { %>
 <ul class="notice">
   <% errors.array().forEach(error => { %>
   <li><%= error.msg %></li>
@@ -19,6 +22,7 @@
     id="fname"
     name="account_firstname"
     placeholder="Enter your first name"
+    value="<%= locals.account_firstname || '' %>"
     required
   />
   <label for="lname">Last Name</label>
@@ -27,6 +31,7 @@
     id="lname"
     name="account_lastname"
     placeholder="Enter your last name"
+    value="<%= locals.account_lastname || '' %>"
     required
   />
   <label for="email">Email</label>
@@ -34,7 +39,8 @@
     type="email"
     id="email"
     name="account_email"
-    placeholder="example@example.com"
+    placeholder="Enter your email address"
+    value="<%= locals.account_email || '' %>"
     required
   />
   <label for="password">Password</label>
