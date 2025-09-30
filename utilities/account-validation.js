@@ -70,4 +70,4 @@ validate.checkRegData = async (req, res, next) => {
   next();
 };
 
-module.exports = validate;
+module.exports = validate; // Export the validation functions to be used in accountRoute.js

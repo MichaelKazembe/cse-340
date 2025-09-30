@@ -4,4 +4,4 @@ const errorTestController = require("../controllers/errorTestController");
 
 router.get("/trigger-error", errorTestController.triggerError); // Route to trigger an error
 
-module.exports = router;
+module.exports = router; // Export the router to be used in server.js
