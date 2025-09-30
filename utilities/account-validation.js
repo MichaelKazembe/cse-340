@@ -5,6 +5,7 @@ const validate = {};
 /* ************************
  *  Registration Data Validation Rules
  * ************************ */
+
 validate.registrationRules = () => {
   return [
     // First name is required and must be string
@@ -45,3 +46,28 @@ validate.registrationRules = () => {
       .withMessage("Password does not meet requirements."),
   ];
 };
+
+/* ************************
+ *  Check Registration Data and Return Errors
+ * ************************ */
+
+validate.checkRegData = async (req, res, next) => {
+  const { account_firstname, account_lastname, account_email } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("account/register", {
+      errors,
+      title: "Registration",
+      nav,
+      account_firstname,
+      account_lastname,
+      account_email,
+    });
+    return;
+  }
+  next();
+};
+
+module.exports = validate;
