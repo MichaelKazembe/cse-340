@@ -81,4 +81,24 @@ validate.checkRegData = async (req, res, next) => {
   next();
 };
 
+/* ************************
+ *  Login Data Validation Rules
+ * ************************ */
+
+validate.loginRules = () => {
+  return [
+    // Valid email is required
+    body("account_email")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("A valid email is required."),
+
+    // password is required
+    body("account_password").notEmpty().withMessage("Password is required."),
+  ];
+};
+
 module.exports = validate; // Export the validation functions to be used in accountRoute.js
