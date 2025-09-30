@@ -22,7 +22,16 @@ validate.registrationRules = () => {
       .trim()
       .escape()
       .isLength({ min: 2 })
-      .withMessage("Last name is required.")
+      .withMessage("Last name is required."),
+
+    // Valid email is required and cannot already exist in database
+    body("account_email")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isEmail()
+      .normalizeEmail() // Normalizes the email address (e.g., removes dots in Gmail addresses)
+      .withMessage("A valid email is required.")
       .custom(async (account_email) => {
         const emailExists = await accountModel.checkExistingEmail(
           account_email
@@ -33,15 +42,6 @@ validate.registrationRules = () => {
           );
         }
       }),
-
-    // Valid email is required and cannot already exist in database
-    body("account_email")
-      .trim()
-      .escape()
-      .notEmpty()
-      .isEmail()
-      .normalizeEmail() // Normalizes the email address (e.g., removes dots in Gmail addresses)
-      .withMessage("A valid email is required."),
 
     // password is required and must be strong
     body("account_password")
@@ -74,6 +74,50 @@ validate.checkRegData = async (req, res, next) => {
       nav,
       account_firstname,
       account_lastname,
+      account_email,
+    });
+    return;
+  }
+  next();
+};
+
+/* ************************
+ *  Login Data Validation Rules
+ * ************************ */
+
+validate.loginRules = () => {
+  return [
+    // Valid email is required
+    body("account_email")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("A valid email is required."),
+
+    // password is required
+    body("account_password")
+      .trim()
+      .notEmpty()
+      .withMessage("Password is required."),
+  ];
+};
+
+/* ************************
+ *  Check Login Data and Return Errors
+ * ************************ */
+
+validate.checkLoginData = async (req, res, next) => {
+  const { account_email } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("account/login", {
+      errors,
+      title: "Login",
+      nav,
       account_email,
     });
     return;
