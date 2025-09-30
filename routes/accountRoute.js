@@ -18,4 +18,9 @@ router.post(
   accountController.registerAccount // if no errors, register the account
 );
 
+// Process the login attempt
+router.post("/login", (req, res) => {
+  req.status(200).send("login process");
+});
+
 module.exports = router; // Export the router to be used in server.js
