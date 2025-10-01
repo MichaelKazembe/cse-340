@@ -13,12 +13,12 @@ router.get("/detail/:invId", invController.buildDetailView);
 router.get("/management", invController.buildManagementView);
 
 // Route to build new classification Name
-// router.get("/management/classification", invController.buildNewClassification);
+router.get("/add-classification", invController.buildAddClassificationView);
 
 // Route to create new classification Name
-// router.post("/management/classification/:classificationName", invController.buildNewClassification);
+// router.post("/add-classification/:classificationName", invController.buildAddClassification);
 
 // Route to build new inventory view
-// router.get("/management/inventory/:inventoryId", invController.buildNewInventory);
+router.get("/add-inventory", invController.buildAddInventoryView);
 
 module.exports = router; // Export the router to be used in server.js

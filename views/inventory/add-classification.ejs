@@ -1,10 +1,10 @@
-<!-- Contain a form for adding a new classification 
- (you will only need to add the classification name, 
- the primary key in the table is auto-incrementing).
- -->
+<!-- CONTENT HEADING -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { %> res.redirect("/"); <% } %>
 
- <!-- Message -->
-  <!-- <%# message () %> -->
+<!-- Message -->
+<%# message () %>
 
 <!-- FORM FOR ADDING NEW CLASSIFICATION  -->
 

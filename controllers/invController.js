@@ -55,8 +55,44 @@ invCont.buildManagementView = async function (req, res, next) {
   res.render("./inventory/management", {
     title: "Inventory Management",
     nav,
-    errors: null,
   });
 };
+
+/* ***************************
+ *  Build add classification view
+ * ************************** */
+invCont.buildAddClassificationView = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,     
+  });
+};
+
+/* ***************************
+ *  Build add inventory view
+ * ************************** */
+invCont.buildAddInventoryView = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("./inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+  });
+};
+
+/* ***************************
+ *  Handle add classification
+ * ************************** */
+// invCont.buildAddClassification = async function (req, res, next) {
+//   const { classificationName } = req.body;
+//   const addResult = await invModel.addClassification(classificationName);
+//   if (addResult) {
+//     req.flash("success", `The classification ${classificationName} was added successfully.`);
+//     res.redirect("/inv/management");
+//   } else {
+//     req.flash("error", `Sorry, the classification ${classificationName} could not be added.`);
+//     res.redirect("/inv/management");
+//   }
+// };
 
 module.exports = invCont; // Export the controller object to be used in routes
