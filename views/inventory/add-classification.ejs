@@ -8,12 +8,27 @@
 
 <!-- FORM FOR ADDING NEW CLASSIFICATION  -->
 
-<!-- <form action="" name="classification-table" method="post">
+<form
+  action="/inv/add-classification"
+  name="classification-table"
+  method="post"
+>
   <label for="classfName">Add New Classification</label>
-  <input type="text" name="classification_name" id="classfName" 
+  <input
+    type="text"
+    name="classification_name"
+    id="classfName"
     placeholder="Enter a classification name"
-    pattern="[]" 
+    pattern="[A-Za-z0-9]+"
     title="classification name cannot contain a space or special character of any kind"
-    required/>
-    <button type="submit">Add Classification</button>
-</form> -->
+    required
+  />
+  <small class="password-help">
+    Classification name cannot contain a space or special character of any
+    kind.<br />
+    • Characters NOT allowed: spaces, @, #, $, %, &amp;, *, (, ), -, _, +, =, [,
+    ], {, }, |, \, :, ;, ", ', &lt;, &gt;, ,, ., ?, /, ~, `<br />
+    • Only letters (A-Z, a-z) and numbers (0-9) are allowed
+  </small>
+  <button type="submit">Add Classification</button>
+</form>
