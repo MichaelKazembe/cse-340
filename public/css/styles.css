@@ -621,7 +621,8 @@ form {
 
 /* Password help text for login & registration form */
 #registration-form .password-help,
-#login-form .password-help {
+#login-form .password-help,
+#add-classification-form .password-help {
   display: block;
   color: #888;
   font-size: small;
