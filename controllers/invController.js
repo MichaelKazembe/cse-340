@@ -65,7 +65,7 @@ invCont.buildAddClassificationView = async function (req, res, next) {
   const nav = await utilities.getNav();
   res.render("./inventory/add-classification", {
     title: "New Classification",
-    nav,     
+    nav,
   });
 };
 
@@ -83,16 +83,22 @@ invCont.buildAddInventoryView = async function (req, res, next) {
 /* ***************************
  *  Handle add classification
  * ************************** */
-// invCont.buildAddClassification = async function (req, res, next) {
-//   const { classificationName } = req.body;
-//   const addResult = await invModel.addClassification(classificationName);
-//   if (addResult) {
-//     req.flash("success", `The classification ${classificationName} was added successfully.`);
-//     res.redirect("/inv/management");
-//   } else {
-//     req.flash("error", `Sorry, the classification ${classificationName} could not be added.`);
-//     res.redirect("/inv/management");
-//   }
-// };
+invCont.handleAddClassification = async function (req, res, next) {
+  const { classification_name } = req.body;
+  const addResult = await invModel.createNewClassification(classification_name);
+  if (addResult) {
+    req.flash(
+      "success",
+      `The classification ${classification_name} was added successfully.`
+    );
+    res.redirect("/inv/management");
+  } else {
+    req.flash(
+      "error",
+      `Sorry, the classification ${classification_name} could not be added.`
+    );
+    res.redirect("/inv/management");
+  }
+};
 
 module.exports = invCont; // Export the controller object to be used in routes

@@ -16,7 +16,7 @@ router.get("/management", invController.buildManagementView);
 router.get("/add-classification", invController.buildAddClassificationView);
 
 // Route to create new classification Name
-// router.post("/add-classification/", invController.buildAddClassification);
+router.post("/add-classification/", invController.handleAddClassification);
 
 // Route to build new inventory view
 router.get("/add-inventory", invController.buildAddInventoryView);
