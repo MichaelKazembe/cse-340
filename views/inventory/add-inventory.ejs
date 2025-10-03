@@ -116,12 +116,7 @@
 
   <!-- Vehicle Classification -->
   <label for="classification_id">Vehicle Classification</label>
-  <select id="classification_id" name="classification_id" required>
-    <option value="" disabled selected>
-      Select a classification (e.g. SUV, Sedan, Truck)
-    </option>
-    <!-- Options will be populated server-side or via JS -->
-  </select>
-
+    <!-- Classification List Generated from InvController.js -->
+     <%- classificationList %>
   <button type="submit">Add Vehicle</button>
 </form>

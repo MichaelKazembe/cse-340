@@ -127,4 +127,17 @@ invCont.handleAddClassification = async function (req, res, next) {
   }
 };
 
+/* ***************************
+ *  Build Add Inventory View
+ * ************************** */
+invCont.buildAddInventoryView = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  const classificationList = await utilities.buildClassificationList();
+  res.render("./inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+    classificationList,
+  });
+};
+
 module.exports = invCont; // Export the controller object to be used in routes
