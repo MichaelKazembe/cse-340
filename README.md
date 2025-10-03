@@ -5,6 +5,9 @@ This document is intended to get you started quickly in building a backend drive
 
 The only prerequisite software required to have installed at this point is Git for version control and a code editor - we will use VS Code (VSC).
 
+## Project Live URL
+<https://cse-340-motors-13bw.onrender.com>
+
 ## Package Management
 
 The foundation of the project development software is Node. While functional, Node depends on "packages" to add functionality to accomplish common tasks. This requires a package manager. Three common managers are NPM (Node Package Manager), YARN, and PNPM. While all do the same thing, they do it slightly differently. We will use PNPM for two reasons: 1) All packages are stored on your computer only once and then symlinks (system links) are created from the package to the project as needed, 2) performance is increased meaning that when the project builds, it does so faster.
