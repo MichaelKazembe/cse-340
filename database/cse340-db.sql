@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS public.account (
 	CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
 
--- Date for table 'classification'
+-- Data for table 'classification'
 
 INSERT INTO public.classification (classification_name)
 VALUES ('Custom'),

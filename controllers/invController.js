@@ -47,4 +47,146 @@ invCont.buildDetailView = async function (req, res, next) {
   });
 };
 
+/* ***************************
+ *  Build Management view
+ * ************************** */
+invCont.buildManagementView = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("./inventory/management", {
+    title: "Inventory Management",
+    nav,
+  });
+};
+
+/* ***************************
+ *  Build add classification view
+ * ************************** */
+invCont.buildAddClassificationView = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("./inventory/add-classification", {
+    title: "New Classification",
+    nav,
+  });
+};
+
+/* ***************************
+ *  Handle add classification
+ * ************************** */
+invCont.handleAddClassification = async function (req, res, next) {
+  const { classification_name } = req.body;
+
+  try {
+    const addResult = await invModel.createNewClassification(
+      classification_name
+    );
+    if (addResult) {
+      req.flash(
+        "success",
+        `The classification "${classification_name}" was added successfully.`
+      );
+      // Create new navigation to show the new classification immediately
+      const nav = await utilities.getNav();
+      res.render("./inventory/management", {
+        title: "Inventory Management",
+        nav,
+      });
+    } else {
+      req.flash(
+        "error",
+        `Sorry, the classification "${classification_name}" could not be added.`
+      );
+      const nav = await utilities.getNav();
+      res.render("./inventory/add-classification", {
+        title: "New Classification",
+        nav,
+        classification_name,
+      });
+    }
+  } catch (error) {
+    req.flash(
+      "error",
+      `Sorry, there was an error adding the classification "${classification_name}".`
+    );
+    const nav = await utilities.getNav();
+    res.render("./inventory/add-classification", {
+      title: "New Classification",
+      nav,
+      classification_name,
+    });
+  }
+};
+
+/* ***************************
+ *  Build Add Inventory View
+ * ************************** */
+invCont.buildAddInventoryView = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  const classificationList = await utilities.buildClassificationList();
+  res.render("./inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+    classificationList,
+  });
+};
+
+/* ***************************
+ *  Handle add Inventory
+ * ************************** */
+invCont.handleAddInventory = async function (req, res, next) {
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+
+  try {
+    const addResult = await invModel.createNewInventoryItem(
+      req.body
+    );
+    if (addResult) {
+      req.flash(
+        "success",
+        `The inventory item "${inv_make} ${inv_model}" was added successfully.`
+      );
+      // Create new navigation to show the new vehicle immediately
+      const nav = await utilities.getNav();
+      res.render("./inventory/management", {
+        title: "Inventory Management",
+        nav,
+      });
+    } else {
+      req.flash(
+        "error",
+        `Sorry, the inventory item "${inv_make} ${inv_model}" could not be added.`
+      );
+      const nav = await utilities.getNav();
+      const classificationList = await utilities.buildClassificationList();
+      res.render("./inventory/add-inventory", {
+        title: "Add New Inventory",
+        nav,
+        classificationList,
+      });
+    }
+  } catch (error) {
+    req.flash(
+      "error",
+      `Sorry, there was an error adding the inventory item "${inv_make} ${inv_model}".`
+    );
+    const nav = await utilities.getNav();
+    const classificationList = await utilities.buildClassificationList();
+    res.render("./inventory/add-inventory", {
+      title: "Add New Inventory",
+      nav,
+      classificationList,
+    });
+  }
+};
+
 module.exports = invCont; // Export the controller object to be used in routes

@@ -1,0 +1,21 @@
+<!-- CONTENT HEADING -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { %> res.redirect("/"); <% } %>
+
+<!-- MESSAGE BLOCK -->
+<%- messages() %>
+
+<div class="management-links">
+  <!-- trigger a process to deliver an add new classification view -->
+  <a
+    href="/inv/add-classification"
+    class="management-link"
+    title="Add New Classification"
+    >Add New Classification</a
+  >
+  <!-- trigger a process to deliver an add inventory view -->
+  <a href="/inv/add-inventory" class="management-link" title="Add New Vehicle"
+    >Add New Vehicle</a
+  >
+</div>

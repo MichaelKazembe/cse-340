@@ -10,6 +10,32 @@ async function getClassifications() {
 }
 
 /* ***************************
+ *  Create a new classification in the classification table
+ * ************************** */
+async function createNewClassification(classification_name) {
+  try {
+    const sql =
+      "INSERT INTO public.classification (classification_name) VALUES ($1)";
+    return await pool.query(sql, [classification_name]);
+  } catch (error) {
+    console.log("createNewClassification error" + error);
+  }
+}
+
+/* ***************************
+ *  Get classification_name
+ * ************************** */
+async function getClassificationByName(classification_name) {
+  try {
+    const sql =
+      "SELECT classification_name FROM public.classification WHERE classification_name=$1";
+    return await pool.query(sql, [classification_name]);
+  } catch (error) {
+    console.log("getClassificationByName error" + error);
+  }
+}
+
+/* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
 async function getInventoryByClassificationId(classification_id) {
@@ -45,8 +71,36 @@ async function getInventoryById(inv_id) {
   }
 }
 
+/* ***************************
+ *  Create a new inventory item in the inventory table
+ * ************************** */
+async function createNewInventoryItem(inv_data) {
+  try {
+    const sql =
+      "INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
+    return await pool.query(sql, [
+      inv_data.inv_make,
+      inv_data.inv_model,
+      inv_data.inv_year,
+      inv_data.inv_description,
+      inv_data.inv_image,
+      inv_data.inv_thumbnail,
+      inv_data.inv_price,
+      inv_data.inv_miles,
+      inv_data.inv_color,
+      inv_data.classification_id,
+    ]);
+  } catch (error) {
+    console.log("createNewInventoryItem error" + error);
+  }
+}
+
+
 module.exports = {
   getClassifications, // Export the functions to be used in baseController.js
   getInventoryByClassificationId, // Export the functions to be used in invController.js
   getInventoryById, // Export the functions to be used in invController.js
+  createNewClassification, // Export the function to be used in invController.js
+  getClassificationByName, // Export the function to be used in InvController.js
+  createNewInventoryItem, // Export the function to be used in invController.js
 };

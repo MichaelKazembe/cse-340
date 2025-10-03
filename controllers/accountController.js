@@ -14,8 +14,6 @@ async function buildLogin(req, res, next) {
   });
 }
 
-
-
 /* ************************
  *  Deliver Registration view
  *************************/
