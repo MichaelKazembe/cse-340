@@ -628,7 +628,7 @@ form {
 #login-form .password-help,
 #add-classification-form .password-help {
   display: block;
-  color: #888;
+  color: #636262;
   font-size: small;
   margin-top: 0.3rem;
   margin-bottom: 1rem;
