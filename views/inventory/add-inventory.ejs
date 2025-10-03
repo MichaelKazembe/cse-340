@@ -6,6 +6,17 @@
 <!-- MESSAGE -->
 <%- messages () %>
 
+<!-- SERVER-SIDE VALIDATION ERRORS -->
+<% if (typeof errors != 'undefined') { %>
+<div id="messages">
+  <ul class="warning">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+</div>
+<% } %>
+
 <!-- Form for adding inventory -->
 
 <form
@@ -116,7 +127,7 @@
 
   <!-- Vehicle Classification -->
   <label for="classification_id">Vehicle Classification</label>
-    <!-- Classification List Generated from InvController.js -->
-     <%- classificationList %>
+  <!-- Classification List Generated from InvController.js (invCont.buildAddInventoryView) -->
+  <%- classificationList %>
   <button type="submit">Add Vehicle</button>
 </form>

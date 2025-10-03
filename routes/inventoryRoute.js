@@ -27,4 +27,11 @@ router.post(
 // Route to build new inventory view
 router.get("/add-inventory", invController.buildAddInventoryView);
 
+// Route to create a new inventory 
+router.post("/add-inventory", 
+    validate.inventoryRules(),
+    validate.checkInventoryData,
+    invController.handleAddInventory
+);
+
 module.exports = router; // Export the router to be used in server.js
