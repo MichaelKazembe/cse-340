@@ -96,24 +96,22 @@ validate.inventoryRules = () => {
       .withMessage("Description is required.")
       .isLength({ max: 500 })
       .withMessage("Description cannot be longer than 500 characters."),
-    // inv_image is required and must be a valid URL
+    // inv_image is required and must be a valid path
     body("inv_image")
       .trim()
       .isLength({ min: 1 })
-      .withMessage("Image URL is required.")
-      .isURL()
-      .withMessage("Please provide a valid URL for the image.")
-      .isLength({ max: 255 })
-      .withMessage("Image URL cannot be longer than 255 characters."),
-    // inv_thumbnail is required and must be a valid URL
+      .withMessage("Image path is required.")
+      .matches(/^\/images\/vehicles\/[a-zA-Z0-9._-]+\.((jpg)|(jpeg)|(png)|(gif))$/i)
+      .withMessage("Image path must be in the form /images/vehicles/model.jpg"),
+    // inv_thumbnail is required and must be a valid path
     body("inv_thumbnail")
       .trim()
       .isLength({ min: 1 })
-      .withMessage("Thumbnail URL is required.")
-      .isURL()
-      .withMessage("Please provide a valid URL for the thumbnail.")
-      .isLength({ max: 255 })
-      .withMessage("Thumbnail URL cannot be longer than 255 characters."),
+      .withMessage("Thumbnail path is required.")
+      .matches(/^\/images\/vehicles\/[a-zA-Z0-9._-]+\.((jpg)|(jpeg)|(png)|(gif))$/i)
+      .withMessage(
+        "Thumbnail path must be in the form /images/vehicles/model-tn.jpg"
+      ),
     // inv_price is required and must be a valid decimal
     body("inv_price")
       .trim()
