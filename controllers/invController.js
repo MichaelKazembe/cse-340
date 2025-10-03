@@ -85,19 +85,45 @@ invCont.buildAddInventoryView = async function (req, res, next) {
  * ************************** */
 invCont.handleAddClassification = async function (req, res, next) {
   const { classification_name } = req.body;
-  const addResult = await invModel.createNewClassification(classification_name);
-  if (addResult) {
-    req.flash(
-      "success",
-      `The classification ${classification_name} was added successfully.`
+
+  try {
+    const addResult = await invModel.createNewClassification(
+      classification_name
     );
-    res.redirect("/inv/management");
-  } else {
+    if (addResult) {
+      req.flash(
+        "success",
+        `The classification "${classification_name}" was added successfully.`
+      );
+      // Create new navigation to show the new classification immediately
+      const nav = await utilities.getNav();
+      res.render("./inventory/management", {
+        title: "Inventory Management",
+        nav,
+      });
+    } else {
+      req.flash(
+        "error",
+        `Sorry, the classification "${classification_name}" could not be added.`
+      );
+      const nav = await utilities.getNav();
+      res.render("./inventory/add-classification", {
+        title: "New Classification",
+        nav,
+        classification_name,
+      });
+    }
+  } catch (error) {
     req.flash(
       "error",
-      `Sorry, the classification ${classification_name} could not be added.`
+      `Sorry, there was an error adding the classification "${classification_name}".`
     );
-    res.redirect("/inv/management");
+    const nav = await utilities.getNav();
+    res.render("./inventory/add-classification", {
+      title: "New Classification",
+      nav,
+      classification_name,
+    });
   }
 };
 

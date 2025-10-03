@@ -4,13 +4,18 @@
 <% } else { %> res.redirect("/"); <% } %>
 
 <!-- MESSAGE BLOCK -->
-<%# message() %>
+<%- messages() %>
 
-<!-- two links (not directly to a view must use MVC approach) -->
-<!-- LINK 1 -->
-<!-- trigger a process to deliver an add new classification view -->
- <!-- <%#- classification %> -->
-
-<!-- LINK 2 -->
- <!-- trigger a process to deliver an add inventory view -->
-  <!-- <%#- inventory %> -->
+<div class="management-links">
+  <!-- trigger a process to deliver an add new classification view -->
+  <a
+    href="/inv/add-classification"
+    class="management-link"
+    title="Add New Classification"
+    >Add New Classification</a
+  >
+  <!-- trigger a process to deliver an add inventory view -->
+  <a href="/inv/add-inventory" class="management-link" title="Add New Vehicle"
+    >Add New Vehicle</a
+  >
+</div>

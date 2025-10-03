@@ -6,6 +6,17 @@
 <!-- Message -->
 <%- messages() %>
 
+<!-- Server-side validation errors -->
+<% if (typeof errors != 'undefined') { %>
+<div id="messages">
+  <ul class="warning">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+</div>
+<% } %>
+
 <!-- FORM FOR ADDING NEW CLASSIFICATION  -->
 
 <form
@@ -23,6 +34,7 @@
     pattern="[A-Za-z0-9]+"
     title="classification name cannot contain a space or special character of any kind"
     required
+    value="<%= typeof classification_name != 'undefined' ? classification_name : '' %>"
   />
   <small class="password-help">
     Classification name cannot contain a space or special character of any

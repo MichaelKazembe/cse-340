@@ -25,15 +25,15 @@ async function createNewClassification(classification_name) {
 /* ***************************
  *  Get classification_name
  * ************************** */
-// async function getClassificationByName(classification_name) {
-//   try {
-//     const sql =
-//       "SELECT classification_name FROM public.classification WHERE classification_name=$1";
-//     return await pool.query(sql, [classification_name]);
-//   } catch (error) {
-//     console.log("getClassificationByName error" + error);
-//   }
-// }
+async function getClassificationByName(classification_name) {
+  try {
+    const sql =
+      "SELECT classification_name FROM public.classification WHERE classification_name=$1";
+    return await pool.query(sql, [classification_name]);
+  } catch (error) {
+    console.log("getClassificationByName error" + error);
+  }
+}
 
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
@@ -76,5 +76,5 @@ module.exports = {
   getInventoryByClassificationId, // Export the functions to be used in invController.js
   getInventoryById, // Export the functions to be used in invController.js
   createNewClassification, // Export the function to be used in invController.js
-  // getClassificationByName, // Export the function to be used in InvController.js
+  getClassificationByName, // Export the function to be used in InvController.js
 };
