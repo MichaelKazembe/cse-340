@@ -54,7 +54,7 @@ async function registerAccount(req, res) {
     res.status(500).render("account/register", {
       title: "Register",
       nav,
-      // errors: null,
+      errors: null,
     });
     return;
   }
@@ -74,6 +74,7 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     });
   } else {
     req.flash("warning", "Sorry, the registration failed.");
