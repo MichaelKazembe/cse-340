@@ -54,7 +54,7 @@ async function registerAccount(req, res) {
     res.status(500).render("account/register", {
       title: "Register",
       nav,
-      errors: null,
+      // errors: null,
     });
     return;
   }

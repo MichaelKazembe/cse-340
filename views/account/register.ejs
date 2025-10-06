@@ -8,7 +8,7 @@
 <!-- Display Validation Errors -->
 <% if (errors) { %>
 <div id="messages">
-  <ul class="warning">
+  <ul class="notice">
     <% errors.array().forEach(error => { %>
     <li><%= error.msg %></li>
     <% }) %>

@@ -57,6 +57,9 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// JWT token check middleware
+app.use(utilities.checkJWTToken);
+
 /* ***********************
  * Routes
  *************************/
