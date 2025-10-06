@@ -28,5 +28,11 @@ router.post(
   // },
   accountController.accountLogin
 );
+// Route to account management view
+router.get(
+  "/management",
+  utilities.checkLogin,
+  accountController.buildAccountManagement
+);
 
 module.exports = router; // Export the router to be used in server.js
