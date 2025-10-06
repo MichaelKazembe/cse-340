@@ -6,6 +6,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const cookieParser = require("cookie-parser");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
@@ -42,6 +43,8 @@ app.use(
     name: "sessionId",
   })
 );
+// Cookie Parser Middleware
+app.use(cookieParser());
 
 //  Express Message  Middleware
 app.use(require("connect-flash")());
