@@ -136,5 +136,17 @@ async function accountLogin(req, res) {
   }
 }
 
+/* ****************************************
+ *  Build Account Management view
+ * ************************************ */
+async function buildAccountManagement(req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("account/acc-management", {
+    title: "Account Management",
+    nav,
+    errors: null,
+  });
+}
+
 // Export the controller function to be used in login, register routes
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin };
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement };

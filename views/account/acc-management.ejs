@@ -1,0 +1,24 @@
+<!-- CONTENT HEADING -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { %> res.redirect("/"); <% } %>
+
+<!-- MESSAGE BLOCK -->
+<%- messages() %>
+
+<!-- Display Validation Errors -->
+<% if (errors) { %>
+<div id="messages">
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+</div>
+<% } %>
+
+<!-- Account Management Info -->
+
+<div>
+    <p>You're logged in!</p>
+</div>

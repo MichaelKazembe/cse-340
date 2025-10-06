@@ -30,8 +30,7 @@ router.post(
 );
 // Route to account management view
 router.get(
-  "/management",
-  utilities.checkLogin,
+  "/",
   accountController.buildAccountManagement
 );
 
