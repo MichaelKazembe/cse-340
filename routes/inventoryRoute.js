@@ -36,6 +36,6 @@ router.post(
 );
 
 // Route to get inventory by classificationId and return as JSON
-router.get("/getInventory/:classificationId", invController.getInventoryJSON);
+router.get("/getInventory/:classification_id", invController.getInventoryJSON);
 
 module.exports = router; // Export the router to be used in server.js

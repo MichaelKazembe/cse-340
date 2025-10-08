@@ -1,17 +1,17 @@
 "use strict";
 
-//  Get a list of items in the inventory baased on classificationId
+// Get a list of items in inventory based on the classification_id
 let classificationList = document.querySelector("#classificationList");
 classificationList.addEventListener("change", function () {
-  let classificationId = classificationList.value;
-  console.log(`classificationId is: ${classificationId}`);
-  let classIdURL = "/inv/getInventory/" + classificationId;
+  let classification_id = classificationList.value;
+  console.log(`classification_id is: ${classification_id}`);
+  let classIdURL = "/inv/getInventory/" + classification_id;
   fetch(classIdURL)
     .then(function (response) {
       if (response.ok) {
         return response.json();
       }
-      throw Error("Network response was not OK");
+      throw Error("Network response was not OK.", response.statusText);
     })
     .then(function (data) {
       console.log(data);

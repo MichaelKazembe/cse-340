@@ -95,7 +95,6 @@ async function createNewInventoryItem(inv_data) {
   }
 }
 
-
 module.exports = {
   getClassifications, // Export the functions to be used in baseController.js
   getInventoryByClassificationId, // Export the functions to be used in invController.js
