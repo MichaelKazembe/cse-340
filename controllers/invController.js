@@ -52,9 +52,11 @@ invCont.buildDetailView = async function (req, res, next) {
  * ************************** */
 invCont.buildManagementView = async function (req, res, next) {
   const nav = await utilities.getNav();
+  const classificationList = await utilities.buildClassificationList();
   res.render("./inventory/management", {
     title: "Inventory Management",
     nav,
+    classificationList,
   });
 };
 
@@ -147,9 +149,7 @@ invCont.handleAddInventory = async function (req, res, next) {
   } = req.body;
 
   try {
-    const addResult = await invModel.createNewInventoryItem(
-      req.body
-    );
+    const addResult = await invModel.createNewInventoryItem(req.body);
     if (addResult) {
       req.flash(
         "success",
