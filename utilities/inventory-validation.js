@@ -101,14 +101,18 @@ validate.inventoryRules = () => {
       .trim()
       .isLength({ min: 1 })
       .withMessage("Image path is required.")
-      .matches(/^\/images\/vehicles\/[a-zA-Z0-9._-]+\.((jpg)|(jpeg)|(png)|(gif))$/i)
+      .matches(
+        /^\/images\/vehicles\/[a-zA-Z0-9._-]+\.((jpg)|(jpeg)|(png)|(gif))$/i
+      )
       .withMessage("Image path must be in the form /images/vehicles/model.jpg"),
     // inv_thumbnail is required and must be a valid path
     body("inv_thumbnail")
       .trim()
       .isLength({ min: 1 })
       .withMessage("Thumbnail path is required.")
-      .matches(/^\/images\/vehicles\/[a-zA-Z0-9._-]+\.((jpg)|(jpeg)|(png)|(gif))$/i)
+      .matches(
+        /^\/images\/vehicles\/[a-zA-Z0-9._-]+\.((jpg)|(jpeg)|(png)|(gif))$/i
+      )
       .withMessage(
         "Thumbnail path must be in the form /images/vehicles/model-tn.jpg"
       ),
@@ -138,7 +142,7 @@ validate.inventoryRules = () => {
 };
 
 /* ******************************
- * Check data and return errors or continue to controller
+ * Check Inventory data and return errors to Add Inventory view or continue to controller
  * ***************************** */
 validate.checkInventoryData = async (req, res, next) => {
   const {
@@ -164,6 +168,51 @@ validate.checkInventoryData = async (req, res, next) => {
       title: "Add New Inventory",
       nav,
       classificationList,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    });
+    return;
+  }
+  next();
+};
+
+/* ******************************
+ * Check Inventory data and return errors to Edit Viewor continue to controller
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    const classificationList = await utilities.buildClassificationList();
+    res.render("inventory/edit-inventory", {
+      errors,
+      title: "Edit Inventory",
+      nav,
+      classificationList,
+      inv_id,
       inv_make,
       inv_model,
       inv_year,
