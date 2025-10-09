@@ -1,0 +1,134 @@
+<!-- CONTENT HEADING -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { %> res.redirect("/"); <% } %>
+
+<!-- MESSAGE -->
+<%- messages () %>
+
+<!-- SERVER-SIDE VALIDATION ERRORS -->
+
+<!-- Form for editing inventory -->
+
+<form
+  action="/inv/update"
+  name="inventory-form"
+  id="edit-inventory-form"
+  method="post"
+>
+  <!-- Vehicle Classification -->
+  <label for="classification_id">Vehicle Classification</label>
+  <!-- Classification List Generated from InvController.js (invCont.buildAddInventoryView) -->
+  <%- classificationList %>
+
+  <!-- Vehicle Make  -->
+  <label for="inv_make">Vehicle Make</label>
+  <input
+    type="text"
+    id="inv_make"
+    name="inv_make"
+    required
+    placeholder="e.g. Toyota"
+    value="<%= typeof inv_make != 'undefined' ? inv_make : '' %>"
+  />
+
+  <!-- Vehicle Model -->
+  <label for="inv_model">Vehicle Model</label>
+  <input
+    type="text"
+    id="inv_model"
+    name="inv_model"
+    required
+    placeholder="e.g. Camry"
+    value="<%= typeof inv_model != 'undefined' ? inv_model : '' %>"
+  />
+
+  <!-- Vehicle Year -->
+  <label for="inv_year">Vehicle Year</label>
+  <input
+    type="number"
+    id="inv_year"
+    name="inv_year"
+    min="1886"
+    max="2025"
+    required
+    placeholder="e.g. 2022"
+    value="<%= typeof inv_year != 'undefined' ? inv_year : '' %>"
+  />
+
+  <!-- Vehicle Description -->
+  <label for="inv_description">Vehicle Description</label>
+  <textarea
+    id="inv_description"
+    name="inv_description"
+    required
+    placeholder="Enter a brief description of the vehicle"
+  >
+<%= typeof inv_description != 'undefined' ? inv_description : '' %></textarea
+  >
+
+  <!-- Vehicle Image -->
+  <label for="inv_image">Vehicle Image</label>
+  <input
+    type="text"
+    id="inv_image"
+    name="inv_image"
+    pattern="^\/images\/vehicles\/[a-zA-Z0-9._-]+\.(jpg|jpeg|png|gif)$"
+    required
+    placeholder="e.g. /images/vehicles/camry.jpg"
+    value="<%= typeof inv_image != 'undefined' ? inv_image : '' %>"
+  />
+
+  <!-- Vehicle Image Thumbnail -->
+  <label for="inv_thumbnail">Vehicle Image Thumbnail</label>
+  <input
+    type="text"
+    id="inv_thumbnail"
+    name="inv_thumbnail"
+    pattern="^\/images\/vehicles\/[a-zA-Z0-9._-]+\.(jpg|jpeg|png|gif)$"
+    required
+    placeholder="e.g. /images/vehicles/camry-tn.jpg"
+    value="<%= typeof inv_thumbnail != 'undefined' ? inv_thumbnail : '' %>"
+  />
+
+  <!-- Vehicle Price -->
+  <label for="inv_price">Vehicle Price</label>
+  <input
+    type="number"
+    step="0.01"
+    id="inv_price"
+    name="inv_price"
+    pattern="^\d+(\.\d{1,2})?$"
+    required
+    placeholder="e.g. 25000.00"
+    value="<%= typeof inv_price != 'undefined' ? inv_price : '' %>"
+  />
+
+  <!-- Vehicle Mileage -->
+  <label for="inv_miles">Vehicle Mileage</label>
+  <input
+    type="number"
+    id="inv_miles"
+    name="inv_miles"
+    pattern="^[1-9][0-9]*$"
+    required
+    placeholder="e.g. 15000"
+    value="<%= typeof inv_miles != 'undefined' ? inv_miles : '' %>"
+  />
+
+  <!-- Vehicle Color -->
+  <label for="inv_color">Vehicle Color</label>
+  <input
+    type="text"
+    id="inv_color"
+    name="inv_color"
+    required
+    placeholder="e.g. Silver"
+    value="<%= typeof inv_color != 'undefined' ? inv_color : '' %>"
+  />
+  <!-- Submit Button -->
+  <button type="submit">Update Vehicle</button>
+  <!-- Hidden field for inv_id -->
+  <input type="hidden" name="inv_id" <% if(locals.inv_id) { % /> value="<%=
+  locals.inv_id %>" <% } %>>
+</form>
