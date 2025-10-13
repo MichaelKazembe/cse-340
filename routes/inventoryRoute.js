@@ -48,4 +48,10 @@ router.post(
   invController.updateInventory
 );
 
+// Route to build delete inventory view
+router.get("/delete/:inv_id", invController.buildDeleteInventoryView);
+
+// Route to delete inventory
+router.post("/delete/", invController.deleteInventory);
+
 module.exports = router; // Export the router to be used in server.js
