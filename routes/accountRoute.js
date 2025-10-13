@@ -24,9 +24,6 @@ router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  // (req, res) => {
-  //   res.status(200).send("login process");
-  // },
   accountController.accountLogin
 );
 // Route to account management view

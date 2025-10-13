@@ -149,5 +149,10 @@ async function buildAccountManagement(req, res, next) {
   });
 }
 
-// Export the controller function to be used in login, register routes
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement };
+module.exports = {
+  buildLogin,
+  buildRegister,
+  registerAccount,
+  accountLogin,
+  buildAccountManagement,
+};

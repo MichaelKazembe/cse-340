@@ -133,6 +133,19 @@ async function updateInventory(
   }
 }
 
+/* ***************************
+ *  Delete an inventory item in the inventory table
+ * ************************** */
+async function deleteInventory(inv_id) {
+  try {
+    const sql = "DELETE FROM public.inventory WHERE inv_id = $1 RETURNING *";
+    const data = await pool.query(sql, [inv_id]);
+    return data.rows[0];
+  } catch (error) {
+    console.log("Delete Inventory error" + error);
+  }
+}
+
 module.exports = {
   getClassifications, // Export the functions to be used in baseController.js
   getInventoryByClassificationId, // Export the functions to be used in invController.js
@@ -141,4 +154,5 @@ module.exports = {
   getClassificationByName, // Export the function to be used in InvController.js
   createNewInventoryItem, // Export the function to be used in invController.js
   updateInventory, // Export the function to be used in invController.js
+  deleteInventory, // Export the function to be used in invController.js
 };
