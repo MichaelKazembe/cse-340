@@ -212,7 +212,8 @@ invCont.getInventoryJSON = async (req, res, next) => {
 invCont.buildEditInventoryView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav();
-  const invData = await invModel.getInventoryById(inv_id);
+  const itemData = await invModel.getInventoryById(inv_id);
+  const invData = itemData[0];
   const classificationList = await utilities.buildClassificationList(
     invData.classification_id
   );
@@ -239,52 +240,71 @@ invCont.buildEditInventoryView = async function (req, res, next) {
 /* ***************************
  *  Handle update Inventory Data
  * ************************** */
-invCont.updateInventory = async function (req, res, next) {
-  let nav = await utilities.getNav();
-  const {
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_description,
-    inv_image,
-    inv_thumbnail,
-    inv_price,
-    inv_miles,
-    inv_color,
-    classification_id,
-  } = req.body;
-  const updateResult = await invModel.updateInventory(
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_description,
-    inv_image,
-    inv_thumbnail,
-    inv_price,
-    inv_miles,
-    inv_color,
-    classification_id
-  );
-  if (updateResult) {
-    const itemName = updateResult.inv_make + " " + updateResult.inv_model;
-    req.flash(
-      "success",
-      `The inventory item "${itemName}" was updated successfully.`
-    );
-    res.redirect("/inv/management");
-  } else {
-    const classificationList = await utilities.buildClassificationList(
-      classification_id
-    );
-    const itemName = `${inv_make} ${inv_model}`;
-    req.flash("error", "Sorry, the insert failed.");
-    res.status(501).render("./inventory/edit-inventory", {
-      title: "Edit " + itemName,
-      nav,
-      classificationList: classificationList,
-      errors: null,
+// invCont.updateInventory = async function (req, res, next) {
+//   let nav = await utilities.getNav();
+//   const {
+//     inv_id,
+//     inv_make,
+//     inv_model,
+//     inv_year,
+//     inv_description,
+//     inv_image,
+//     inv_thumbnail,
+//     inv_price,
+//     inv_miles,
+//     inv_color,
+//     classification_id,
+//   } = req.body;
+//   const updateResult = await invModel.updateInventory(
+//     inv_id,
+//     inv_make,
+//     inv_model,
+//     inv_year,
+//     inv_description,
+//     inv_image,
+//     inv_thumbnail,
+//     inv_price,
+//     inv_miles,
+//     inv_color,
+//     classification_id
+//   );
+//   if (updateResult) {
+//     const itemName = updateResult.inv_make + " " + updateResult.inv_model;
+//     req.flash(
+//       "success",
+//       `The inventory item "${itemName}" was updated successfully.`
+//     );
+//     res.redirect("/inv/management");
+//   } else {
+//     const classificationList = await utilities.buildClassificationList(
+//       classification_id
+//     );
+//     const itemName = `${inv_make} ${inv_model}`;
+//     req.flash("error", "Sorry, the insert failed.");
+//     res.status(501).render("./inventory/edit-inventory", {
+//       title: "Edit " + itemName,
+//       nav,
+//       classificationList: classificationList,
+//       errors: null,
+//       inv_id,
+//       inv_make,
+//       inv_model,
+//       inv_year,
+//       inv_description,
+//       inv_image,
+//       inv_thumbnail,
+//       inv_price,
+//       inv_miles,
+//       inv_color,
+//       classification_id,
+//     });
+//   }
+// };
+
+invCont.updateInventory = async (req, res, next) => {
+  try {
+    let nav = await utilities.getNav();
+    const {
       inv_id,
       inv_make,
       inv_model,
@@ -296,7 +316,56 @@ invCont.updateInventory = async function (req, res, next) {
       inv_miles,
       inv_color,
       classification_id,
-    });
+    } = req.body;
+    const updateResult = await invModel.updateInventory(
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+    );
+
+    if (updateResult) {
+      const itemName = updateResult.inv_make + " " + updateResult.inv_model;
+      req.flash("notice", `The ${itemName} was successfully updated.`);
+      res.redirect("/inv/management");
+    } else {
+      const classificationSelect = await utilities.buildClassificationList(
+        classification_id
+      );
+      const itemName = `${inv_make} ${inv_model}`;
+      req.flash("notice", "Sorry, the insert failed.");
+      res.status(501).render("inventory/edit-inventory", {
+        title: "Edit " + itemName,
+        nav,
+        classificationSelect: classificationSelect,
+        errors: null,
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id,
+      });
+    }
+  } catch (error) {
+    console.error("Error adding inventory item: ", error);
+    req.flash(
+      "messages",
+      "Error adding inventory item. Please try again later."
+    );
+    res.redirect("/inv/add-inventory");
   }
 };
 

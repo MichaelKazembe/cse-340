@@ -1,7 +1,7 @@
 {
-  "name": "cse340",
+  "name": "CSE Motors",
   "version": "1.0.0",
-  "description": "Starter project for CSE 340",
+  "description": "CSE Motors - Vehicle Management System",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

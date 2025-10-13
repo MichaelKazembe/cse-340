@@ -122,7 +122,6 @@ async function updateInventory(
       inv_image,
       inv_thumbnail,
       inv_price,
-      inv_year,
       inv_miles,
       inv_color,
       classification_id,
