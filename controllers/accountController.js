@@ -149,10 +149,111 @@ async function buildAccountManagement(req, res, next) {
   });
 }
 
+/* ****************************************
+ *  Build Account Update view
+ * ************************************ */
+async function buildAccountUpdate(req, res, next) {
+  let nav = await utilities.getNav();
+  const account_id = parseInt(req.params.account_id);
+  const accountData = await accountModel.getAccountById(account_id);
+  if (req.account.account_id !== account_id) {
+    req.flash("notice", "You can only update your own account.");
+    return res.redirect("/account/");
+  }
+  if (!accountData) {
+    req.flash("notice", "No account information found.");
+    return res.redirect("/account/");
+  }
+  res.render("account/acc-update", {
+    title: "Account Update",
+    nav,
+    errors: null,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+  });
+}
+
+/* ****************************************
+ *  Process Account Update
+ * ************************************ */
+async function processAccountUpdate(req, res) {
+  let nav = await utilities.getNav();
+  const { account_id, account_firstname, account_lastname, account_email } =
+    req.body;
+  if (parseInt(req.account.account_id) !== parseInt(account_id)) {
+    req.flash("notice", "You can only update your own account.");
+    return res.redirect("/account/");
+  }
+  const updateResult = await accountModel.updateAccount(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  );
+  if (updateResult) {
+    req.flash("success", "Account information updated.");
+  }
+  res.status(200).render("account/acc-management", {
+    title: "Account Management",
+    nav,
+    errors: null,
+  });
+}
+
+/* ****************************************
+ *  Process Password Update
+ * ************************************ */
+async function processChangePassword(req, res) {
+  let nav = await utilities.getNav();
+  const { account_id, new_password } = req.body;
+  if (parseInt(req.account.account_id) !== parseInt(account_id)) {
+    req.flash("notice", "You can only update your own account.");
+    return res.redirect("/account/");
+  }
+  let hashedPassword;
+  try {
+    // Regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(new_password, 10);
+  } catch (error) {
+    req.flash(
+      "notice",
+      "Sorry, there was an error processing the password change."
+    );
+    res.status(500).render("account/acc-update", {
+      title: "Account Update",
+      nav,
+      errors: null, 
+      account_firstname: req.account.account_firstname,
+      account_lastname: req.account.account_lastname,
+      account_email: req.account.account_email,
+    });
+    return;
+  }
+  const updateResult = await accountModel.updatePassword(
+    account_id,
+    hashedPassword
+  );
+  if (updateResult) {
+    req.flash("success", "Password updated.");
+  } else {
+    req.flash("warning", "Sorry, the password update failed.");
+  }
+  res.status(200).render("account/acc-management", {
+    title: "Account Management",
+    nav,
+    errors: null,
+  });
+}
+
+
 module.exports = {
   buildLogin,
   buildRegister,
   registerAccount,
   accountLogin,
   buildAccountManagement,
+  buildAccountUpdate,
+  processAccountUpdate,
+  processChangePassword,
 };
