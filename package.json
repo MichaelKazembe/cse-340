@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "author": "",
+  "author": "Michael Tatani Kazembe",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",

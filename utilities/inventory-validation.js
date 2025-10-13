@@ -185,7 +185,7 @@ validate.checkInventoryData = async (req, res, next) => {
 };
 
 /* ******************************
- * Check Inventory data and return errors to Edit Viewor continue to controller
+ * Check Inventory data and return errors to Edit Viewer continue to controller
  * ***************************** */
 validate.checkUpdateData = async (req, res, next) => {
   const {
@@ -208,9 +208,9 @@ validate.checkUpdateData = async (req, res, next) => {
     let nav = await utilities.getNav();
     const classificationList = await utilities.buildClassificationList();
     res.render("inventory/edit-inventory", {
-      errors,
       title: "Edit Inventory",
       nav,
+      errors,
       classificationList,
       inv_id,
       inv_make,

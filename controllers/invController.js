@@ -267,14 +267,19 @@ invCont.updateInventory = async function (req, res, next) {
     inv_color,
     classification_id
   );
-  if (updateResult){
+  if (updateResult) {
     const itemName = updateResult.inv_make + " " + updateResult.inv_model;
-    req.flash("success", `The inventory item "${itemName}" was updated successfully.`);
-    res.redirect("/inv/management")
-  }else{
-    const classificationList = await utilities.buildClassificationList(classification_id);
+    req.flash(
+      "success",
+      `The inventory item "${itemName}" was updated successfully.`
+    );
+    res.redirect("/inv/management");
+  } else {
+    const classificationList = await utilities.buildClassificationList(
+      classification_id
+    );
     const itemName = `${inv_make} ${inv_model}`;
-    req.flash("notice", "Sorry, the insert failed.");
+    req.flash("error", "Sorry, the insert failed.");
     res.status(501).render("./inventory/edit-inventory", {
       title: "Edit " + itemName,
       nav,
@@ -290,7 +295,7 @@ invCont.updateInventory = async function (req, res, next) {
       inv_price,
       inv_miles,
       inv_color,
-      classification_id
+      classification_id,
     });
   }
 };

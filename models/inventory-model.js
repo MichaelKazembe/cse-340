@@ -95,6 +95,45 @@ async function createNewInventoryItem(inv_data) {
   }
 }
 
+/* ***************************
+ *  Update an inventory item in the inventory table
+ * ************************** */
+async function updateInventory(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_year,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql =
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_year = $3, inv_description = $4, inv_image = $5, inv_thumbnail = $6, inv_price = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *";
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id,
+    ]);
+    return data.rows[0];
+  } catch (error) {
+    console.log("Model error" + error);
+  }
+}
+
 module.exports = {
   getClassifications, // Export the functions to be used in baseController.js
   getInventoryByClassificationId, // Export the functions to be used in invController.js
@@ -102,4 +141,5 @@ module.exports = {
   createNewClassification, // Export the function to be used in invController.js
   getClassificationByName, // Export the function to be used in InvController.js
   createNewInventoryItem, // Export the function to be used in invController.js
+  updateInventory, // Export the function to be used in invController.js
 };
