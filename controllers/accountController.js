@@ -156,7 +156,7 @@ async function buildAccountUpdate(req, res, next) {
   let nav = await utilities.getNav();
   const account_id = parseInt(req.params.account_id);
   const accountData = await accountModel.getAccountById(account_id);
-  if (req.account.account_id !== account_id) {
+  if (parseInt(res.locals.accountData.account_id) !== account_id) {
     req.flash("notice", "You can only update your own account.");
     return res.redirect("/account/");
   }
@@ -181,7 +181,7 @@ async function processAccountUpdate(req, res) {
   let nav = await utilities.getNav();
   const { account_id, account_firstname, account_lastname, account_email } =
     req.body;
-  if (parseInt(req.account.account_id) !== parseInt(account_id)) {
+  if (parseInt(res.locals.accountData.account_id) !== parseInt(account_id)) {
     req.flash("notice", "You can only update your own account.");
     return res.redirect("/account/");
   }
@@ -207,7 +207,7 @@ async function processAccountUpdate(req, res) {
 async function processChangePassword(req, res) {
   let nav = await utilities.getNav();
   const { account_id, new_password } = req.body;
-  if (parseInt(req.account.account_id) !== parseInt(account_id)) {
+  if (parseInt(res.locals.accountData.account_id) !== parseInt(account_id)) {
     req.flash("notice", "You can only update your own account.");
     return res.redirect("/account/");
   }
@@ -223,10 +223,10 @@ async function processChangePassword(req, res) {
     res.status(500).render("account/acc-update", {
       title: "Account Update",
       nav,
-      errors: null, 
-      account_firstname: req.account.account_firstname,
-      account_lastname: req.account.account_lastname,
-      account_email: req.account.account_email,
+      errors: null,
+      account_firstname: res.locals.accountData.account_firstname,
+      account_lastname: res.locals.accountData.account_lastname,
+      account_email: res.locals.accountData.account_email,
     });
     return;
   }
@@ -246,6 +246,14 @@ async function processChangePassword(req, res) {
   });
 }
 
+/* ****************************************
+ *  Process logout request
+ * ************************************ */
+async function accountLogout(req, res) {
+  res.clearCookie("jwt");
+  return res.redirect("/");
+}
+
 
 module.exports = {
   buildLogin,
@@ -256,4 +264,5 @@ module.exports = {
   buildAccountUpdate,
   processAccountUpdate,
   processChangePassword,
+  accountLogout,
 };

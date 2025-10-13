@@ -52,6 +52,7 @@ router.post(
   accountController.processChangePassword
 );
 
-// 
+// Route to logout
+router.get("/logout", accountController.accountLogout);
 
 module.exports = router; // Export the router to be used in server.js

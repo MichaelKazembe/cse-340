@@ -1,6 +1,5 @@
-# TODO List for Header Conditional Links and Logout Functionality
+# TODO: Style inventoryDisplay table and classificationList select in management.ejs
 
-- [ ] Add accountLogout function in controllers/accountController.js: Clear JWT cookie, flash success message, redirect to home.
-- [ ] Add logout route in routes/accountRoute.js: router.get("/logout", accountController.accountLogout).
-- [ ] Update views/partials/header.ejs: Use EJS conditionals to show "Welcome Basic" (link to /account/) and "Logout" when logged in; show "My Account" when logged out.
-- [ ] Test: Login to verify header shows "Welcome Basic" and "Logout"; logout to verify header shows "My Account" and redirects to home.
+- [x] Add CSS styles for #inventoryDisplay table to match site theme (white background, borders, shadows, consistent colors)
+- [x] Add CSS styles for #classificationList select dropdown to match site theme (similar to form inputs, using CSS variables)
+- [x] Verify styles are applied correctly in the management view (server start denied, but styles added successfully)

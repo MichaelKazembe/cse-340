@@ -626,7 +626,8 @@ form {
 /* Password help text for login & registration form */
 #registration-form .password-help,
 #login-form .password-help,
-#add-classification-form .password-help {
+#add-classification-form .password-help,
+#changePasswordForm .password-help {
   display: block;
   color: #636262;
   font-size: small;
@@ -692,4 +693,67 @@ form {
   }
 }
 /* End Management Links Section */
+
+/* Inventory Management Styles */
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow-lg);
+  overflow: hidden;
+}
+
+#inventoryDisplay th,
+#inventoryDisplay td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--form-input-background);
+}
+
+#inventoryDisplay th {
+  background-color: var(--main-accent);
+  color: var(--body-font-color);
+  font-family: var(--heading-font);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+#inventoryDisplay td {
+  color: var(--primary-text);
+  font-size: 0.95rem;
+}
+
+#inventoryDisplay tr:hover {
+  background-color: var(--primary-background);
+}
+
+#inventoryDisplay tr:last-child td {
+  border-bottom: none;
+}
+
+#classificationList {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--main-accent);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: var(--form-input-background);
+  color: var(--primary-text);
+  transition: border-color 0.2s;
+  margin-bottom: 1rem;
+}
+
+#classificationList:focus {
+  border-color: var(--secondary-accent);
+  outline: none;
+}
+
+#classificationList option {
+  background: #fff;
+  color: var(--primary-text);
+}
+/* End Inventory Management Styles */
 /* Start */

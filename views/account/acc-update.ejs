@@ -23,75 +23,76 @@
   action="/account/update/<%= locals.accountData.account_id %>"
   id="accountUpdateForm"
 >
-  <fieldset>
-    <legend>Update Account Information</legend>
-    <label for="account_firstname">First Name</label>
-    <input
-      type="text"
-      name="account_firstname"
-      id="account_firstname"
-      required
-      value="<%= locals.accountData.account_firstname %>"
-    />
-    <label for="account_lastname">Last Name</label>
-    <input
-      type="text"
-      name="account_lastname"
-      id="account_lastname"
-      required
-      value="<%= locals.accountData.account_lastname %>"
-    />
-    <label for="account_email">Email</label>
-    <input
-      type="email"
-      name="account_email"
-      id="account_email"
-      required
-      value="<%= locals.accountData.account_email %>"
-    />
-    <input type="hidden" name="account_id" id="account_id" value="<%=
-    locals.accountData.account_id ? locals.accountData.account_id : "" %>">
-  </fieldset>
+  <label for="account_firstname">First Name</label>
+  <input
+    type="text"
+    name="account_firstname"
+    id="account_firstname"
+    placeholder="Enter your first name"
+    required
+    value="<%= locals.accountData.account_firstname %>"
+  />
+  <label for="account_lastname">Last Name</label>
+  <input
+    type="text"
+    name="account_lastname"
+    id="account_lastname"
+    placeholder="Enter your last name"
+    required
+    value="<%= locals.accountData.account_lastname %>"
+  />
+  <label for="account_email">Email</label>
+  <input
+    type="email"
+    name="account_email"
+    id="account_email"
+    placeholder="Enter your email address"
+    required
+    value="<%= locals.accountData.account_email %>"
+  />
+  <input type="hidden" name="account_id" id="account_id" value="<%=
+  locals.accountData.account_id ? locals.accountData.account_id : "" %>">
   <button type="submit">Update Account</button>
 </form>
 
 <!-- Change Password Form -->
 <form method="POST" action="/account/change-password" id="changePasswordForm">
-  <fieldset>
-    <legend>Change Password</legend>
-    <label for="current_password">Current Password</label>
-    <input
-      type="password"
-      name="current_password"
-      id="current_password"
-      required
-    />
-    <label for="new_password">New Password</label>
-    <input
-      type="password"
-      name="new_password"
-      id="new_password"
-      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
-      title="Enter New Password that meets the requirements."
-      required
-    />
-    <label for="confirm_password">Confirm New Password</label>
-    <input
-      type="password"
-      name="confirm_password"
-      id="confirm_password"
-      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
-      title="Confirm Password must match the New Password."
-    />
-    <small class="password-help">
-      Password must be:<br />
-      • 12 characters minimum<br />
-      • At least 1 capital letter<br />
-      • At least 1 number<br />
-      • At least 1 special character
-    </small>
-    <input type="hidden" name="account_id" id="account_id" value="<%=
-    locals.accountData.account_id ? locals.accountData.account_id : "" %>">
-  </fieldset>
+  <label for="current_password">Current Password</label>
+  <input
+    type="password"
+    name="current_password"
+    id="current_password"
+    placeholder="Enter your current password"
+    required
+  />
+  <label for="new_password">New Password</label>
+  <input
+    type="password"
+    name="new_password"
+    id="new_password"
+    placeholder="Enter a new secure password"
+    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+    title="Password must be at least 12 characters, contain a capital letter, a number, and a special character."
+    required
+  />
+  <label for="confirm_password">Confirm New Password</label>
+  <input
+    type="password"
+    name="confirm_password"
+    id="confirm_password"
+    placeholder="Confirm your new password"
+    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+    title="Confirm Password must match the New Password."
+    required
+  />
+  <small class="password-help">
+    Password must be:<br />
+    • 12 characters minimum<br />
+    • At least 1 capital letter<br />
+    • At least 1 number<br />
+    • At least 1 special character
+  </small>
+  <input type="hidden" name="account_id" id="account_id" value="<%=
+  locals.accountData.account_id ? locals.accountData.account_id : "" %>">
   <button type="submit">Change Password</button>
 </form>
