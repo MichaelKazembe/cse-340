@@ -300,12 +300,12 @@ invCont.updateInventory = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.error("Error adding inventory item: ", error);
+    console.error("Error editing inventory item: ", error);
     req.flash(
       "messages",
-      "Error adding inventory item. Please try again later."
+      "Error editing inventory item. Please try again later."
     );
-    // res.redirect("/inv/add-inventory");
+    res.redirect("/inv/management");
   }
 };
 

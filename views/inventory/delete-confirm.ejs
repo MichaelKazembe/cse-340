@@ -1,0 +1,73 @@
+<!-- CONTENT HEADING -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { %> res.redirect("/"); <% } %>
+
+<!-- MESSAGE -->
+<%- messages () %>
+
+<p>Confirm Deletion - The delete is permanent.</p>
+
+<!-- Form for deleting inventory -->
+
+<form
+  action="/inv/delete"
+  name="inventory-form"
+  id="delete-inventory-form"
+  method="post"
+>
+  <!-- Vehicle Make  -->
+  <label for="inv_make">Vehicle Make</label>
+  <input
+    type="text"
+    id="inv_make"
+    name="inv_make"
+    required
+    placeholder="e.g. Toyota"
+    value="<%= typeof inv_make != 'undefined' ? inv_make : '' %>"
+  />
+
+  <!-- Vehicle Model -->
+  <label for="inv_model">Vehicle Model</label>
+  <input
+    type="text"
+    id="inv_model"
+    name="inv_model"
+    required
+    placeholder="e.g. Camry"
+    value="<%= typeof inv_model != 'undefined' ? inv_model : '' %>"
+  />
+
+  <!-- Vehicle Year -->
+  <label for="inv_year">Vehicle Year</label>
+  <input
+    type="number"
+    id="inv_year"
+    name="inv_year"
+    min="1886"
+    max="2025"
+    required
+    placeholder="e.g. 2022"
+    value="<%= typeof inv_year != 'undefined' ? inv_year : '' %>"
+  />
+
+  <!-- Vehicle Price -->
+  <label for="inv_price">Vehicle Price</label>
+  <input
+    type="number"
+    step="0.01"
+    id="inv_price"
+    name="inv_price"
+    pattern="^\d+(\.\d{1,2})?$"
+    required
+    readonly
+    placeholder="e.g. 25000.00"
+    value="<%= typeof inv_price != 'undefined' ? inv_price : '' %>"
+  />
+
+  <!-- Submit Button -->
+  <button type="submit">Update Vehicle</button>
+  <!-- Hidden field for inv_id -->
+  <input type="hidden" name="inv_id" <% if(locals.inv_id) { % /> value="<%=
+  locals.inv_id %>" <% } %> />
+</form>
