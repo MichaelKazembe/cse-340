@@ -1,7 +1,7 @@
 <!-- CONTENT HEADING -->
 <% if (title) { %>
 <h1><%= title %></h1>
-<% } else { %> res.redirect("/"); <% } %>
+<% } %>
 
 <!-- MESSAGE BLOCK -->
 <%- messages() %>
@@ -20,5 +20,27 @@
 <!-- Account Management Info -->
 
 <div>
-    <p>You're logged in!</p>
+  <% if (locals.accountData.account_type == "Client") { %>
+  <h2>Welcome, <%= locals.accountData.account_firstname %></h2>
+  <% } else if (locals.accountData.account_type == "Admin" || locals.accountData.account_type == "Employee") { %>
+  <h2>Welcome, <%= locals.accountData.account_firstname %></h2>
+
+  <h3>Inventory Management</h3>
+  <!-- <p>Use the links below to manage inventory.</p> -->
+  <a href="/inv/management" title="Click to add and manage inventory"
+    >Vehicle Management</a>
+  <% } %>
+</div>
+
+<!-- <div>
+  <p>You're logged in!</p>
+</div> -->
+<br>
+<!-- Update Account Information -->
+<div>
+  <h3>Update Account Information</h3>
+  <!-- <p>Use the link below to update your account information.</p> -->
+  <a href="/account/update/<%= locals.accountData.account_id %>" title="Click to update account information"
+    >Update Account Information</a
+  >
 </div>
