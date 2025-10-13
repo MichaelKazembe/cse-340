@@ -206,7 +206,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
 };
 
 /* ***************************
- *  Build edit inventory view
+ *  Build edit/Update inventory view
  * ************************** */
 
 invCont.buildEditInventoryView = async function (req, res, next) {
@@ -307,6 +307,38 @@ invCont.updateInventory = async (req, res, next) => {
     );
     res.redirect("/inv/management");
   }
+};
+
+
+/* ***************************
+ *  Build delete inventory confirmation view
+ * ************************** */
+invCont.buildDeleteInventoryView = async function (req, res, next) {
+ const inv_id = parseInt(req.params.inv_id);
+  let nav = await utilities.getNav();
+  const itemData = await invModel.getInventoryById(inv_id);
+  const invData = itemData[0];
+  const classificationList = await utilities.buildClassificationList(
+    invData.classification_id
+  );
+  const itemName = `${invData.inv_make} ${invData.inv_model}`;
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    classificationList: classificationList,
+    errors: null,
+    inv_id: invData.inv_id,
+    inv_make: invData.inv_make,
+    inv_model: invData.inv_model,
+    inv_year: invData.inv_year,
+    inv_description: invData.inv_description,
+    inv_image: invData.inv_image,
+    inv_thumbnail: invData.inv_thumbnail,
+    inv_price: invData.inv_price,
+    inv_miles: invData.inv_miles,
+    inv_color: invData.inv_color,
+    classification_id: invData.classification_id,
+  }); 
 };
 
 module.exports = invCont; // Export the controller object to be used in routes
