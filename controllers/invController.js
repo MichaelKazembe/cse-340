@@ -309,12 +309,11 @@ invCont.updateInventory = async (req, res, next) => {
   }
 };
 
-
 /* ***************************
  *  Build delete inventory confirmation view
  * ************************** */
 invCont.buildDeleteInventoryView = async function (req, res, next) {
- const inv_id = parseInt(req.params.inv_id);
+  const inv_id = parseInt(req.params.inv_id);
   let nav = await utilities.getNav();
   const itemData = await invModel.getInventoryById(inv_id);
   const invData = itemData[0];
@@ -331,15 +330,91 @@ invCont.buildDeleteInventoryView = async function (req, res, next) {
     inv_make: invData.inv_make,
     inv_model: invData.inv_model,
     inv_year: invData.inv_year,
-    inv_description: invData.inv_description,
-    inv_image: invData.inv_image,
-    inv_thumbnail: invData.inv_thumbnail,
+    // inv_description: invData.inv_description,
+    // inv_image: invData.inv_image,
+    // inv_thumbnail: invData.inv_thumbnail,
     inv_price: invData.inv_price,
-    inv_miles: invData.inv_miles,
-    inv_color: invData.inv_color,
+    // inv_miles: invData.inv_miles,
+    // inv_color: invData.inv_color,
     classification_id: invData.classification_id,
-  }); 
+  });
+};
+
+/* ***************************
+ *  Handle Delete Inventory Data
+ * ************************** */
+
+invCont.deleteInventory = async (req, res, next) => {
+  try {
+    let nav = await utilities.getNav();
+    const {
+      inv_id,
+      // inv_make,
+      // inv_model,
+      // inv_year,
+      // inv_description,
+      // inv_image,
+      // inv_thumbnail,
+      // inv_price,
+      // inv_miles,
+      // inv_color,
+      // classification_id,
+    } = req.body;
+    const deleteResult = await invModel.deleteInventory(
+      inv_id,
+      // inv_make,
+      // inv_model,
+      // inv_year,
+      // inv_description,
+      // inv_image,
+      // inv_thumbnail,
+      // inv_price,
+      // inv_miles,
+      // inv_color,
+      // classification_id
+    );
+
+    if (deleteResult) {
+      const itemName =
+        deleteResult.inv_make +
+        " " +
+        deleteResult.inv_model +
+        " " +
+        deleteResult.inv_year;
+      req.flash("notice", `The ${itemName} was successfully deleted.`);
+      res.redirect("/inv/management");
+    } else {
+      const classificationSelect = await utilities.buildClassificationList(
+        classification_id
+      );
+      const itemName = `${inv_make} ${inv_model}`;
+      req.flash("notice", "Sorry, the delete failed.");
+      res.status(501).render("inventory/delete-confirm", {
+        title: "Delete " + itemName,
+        nav,
+        classificationSelect: classificationSelect,
+        errors: null,
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        // inv_description,
+        // inv_image,
+        // inv_thumbnail,
+        inv_price,
+        // inv_miles,
+        // inv_color,
+        classification_id,
+      });
+    }
+  } catch (error) {
+    console.error("Error deleting inventory item: ", error);
+    req.flash(
+      "messages",
+      "Error deleting inventory item. Please try again later."
+    );
+    res.redirect("/inv/management");
+  }
 };
 
 module.exports = invCont; // Export the controller object to be used in routes
- 
