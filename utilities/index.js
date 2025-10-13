@@ -153,6 +153,24 @@ Util.checkJWTToken = (req, res, next) => {
 };
 
 /* ****************************************
+ * Middleware to check Account Type Using JWT token
+ **************************************** */
+
+Util.checkAccountType = (req, res, next) => {
+  if (res.locals.accountData) {
+    if (res.locals.accountData.account_type < 2) {
+      req.flash("notice", "You do not have permission to access that page.");
+      return res.redirect("/account/login");
+    }
+    next();
+  } else {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+};
+
+
+/* ****************************************
  *  Check Login
  * ************************************ */
  Util.checkLogin = (req, res, next) => {
