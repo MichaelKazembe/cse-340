@@ -38,12 +38,16 @@ invCont.buildDetailView = async function (req, res, next) {
     return next(err);
   }
   const detail = await utilities.buildDetailViewHtml(data); // Build the inventory detail HTML
+  const reviews = await invModel.getReviewsByInvId(inv_id); // Fetch reviews for the vehicle
+  const reviewsHtml = await utilities.buildReviewsHtml(reviews); // Build reviews HTML
   let nav = await utilities.getNav(); // Get navigation HTML
   const vehicleName = data[0].inv_make; // Get vehicle name for the title
   res.render("./inventory/detail", {
     title: vehicleName,
     nav,
     detail,
+    reviewsHtml,
+    inv_id,
   });
 };
 
@@ -347,32 +351,8 @@ invCont.buildDeleteInventoryView = async function (req, res, next) {
 invCont.deleteInventory = async (req, res, next) => {
   try {
     let nav = await utilities.getNav();
-    const {
-      inv_id,
-      // inv_make,
-      // inv_model,
-      // inv_year,
-      // inv_description,
-      // inv_image,
-      // inv_thumbnail,
-      // inv_price,
-      // inv_miles,
-      // inv_color,
-      // classification_id,
-    } = req.body;
-    const deleteResult = await invModel.deleteInventory(
-      inv_id,
-      // inv_make,
-      // inv_model,
-      // inv_year,
-      // inv_description,
-      // inv_image,
-      // inv_thumbnail,
-      // inv_price,
-      // inv_miles,
-      // inv_color,
-      // classification_id
-    );
+    const { inv_id } = req.body;
+    const deleteResult = await invModel.deleteInventory(inv_id);
 
     if (deleteResult) {
       const itemName =
@@ -398,12 +378,6 @@ invCont.deleteInventory = async (req, res, next) => {
         inv_make,
         inv_model,
         inv_year,
-        // inv_description,
-        // inv_image,
-        // inv_thumbnail,
-        inv_price,
-        // inv_miles,
-        // inv_color,
         classification_id,
       });
     }
@@ -414,6 +388,35 @@ invCont.deleteInventory = async (req, res, next) => {
       "Error deleting inventory item. Please try again later."
     );
     res.redirect("/inv/management");
+  }
+};
+
+/* ***************************
+ *  Handle Add Review
+ * ************************** */
+invCont.handleAddReview = async function (req, res, next) {
+  const { inv_id } = req.params;
+  const { review_rating, review_text } = req.body;
+  const account_id = res.locals.accountData.account_id; 
+
+  try {
+    const reviewData = {
+      inv_id: parseInt(inv_id),
+      account_id,
+      review_rating: parseInt(review_rating),
+      review_text,
+    };
+    const addResult = await invModel.addReview(reviewData);
+    if (addResult) {
+      req.flash("success", "Review added successfully.");
+      res.redirect(`/inv/detail/${inv_id}`);
+    } else {
+      req.flash("error", "Sorry, the review could not be added.");
+      res.redirect(`/inv/detail/${inv_id}`);
+    }
+  } catch (error) {
+    req.flash("error", "Sorry, there was an error adding the review.");
+    res.redirect(`/inv/detail/${inv_id}`);
   }
 };
 
