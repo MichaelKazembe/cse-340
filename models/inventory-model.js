@@ -146,6 +146,39 @@ async function deleteInventory(inv_id) {
   }
 }
 
+/* ***************************
+ *  Add a review to the reviews table
+ * ************************** */
+async function addReview(reviewData) {
+  try {
+    const sql =
+      "INSERT INTO public.reviews (inv_id, account_id, review_rating, review_text) VALUES ($1, $2, $3, $4) RETURNING *";
+    const data = await pool.query(sql, [
+      reviewData.inv_id,
+      reviewData.account_id,
+      reviewData.review_rating,
+      reviewData.review_text,
+    ]);
+    return data.rows[0];
+  } catch (error) {
+    console.log("Add Review error" + error);
+  }
+}
+
+/* ***************************
+ *  Get reviews by inventory ID
+ * ************************** */
+async function getReviewsByInvId(inv_id) {
+  try {
+    const sql =
+      "SELECT r.review_id, r.review_rating, r.review_text, r.review_date, a.account_firstname, a.account_lastname FROM public.reviews r JOIN public.account a ON r.account_id = a.account_id WHERE r.inv_id = $1 ORDER BY r.review_date DESC";
+    const data = await pool.query(sql, [inv_id]);
+    return data.rows;
+  } catch (error) {
+    console.log("Get Reviews error" + error);
+  }
+}
+
 module.exports = {
   getClassifications, // Export the functions to be used in baseController.js
   getInventoryByClassificationId, // Export the functions to be used in invController.js
@@ -155,4 +188,6 @@ module.exports = {
   createNewInventoryItem, // Export the function to be used in invController.js
   updateInventory, // Export the function to be used in invController.js
   deleteInventory, // Export the function to be used in invController.js
+  addReview, // Export the function to be used in invController.js
+  getReviewsByInvId, // Export the function to be used in invController.js
 };

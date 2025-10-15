@@ -70,4 +70,7 @@ router.get("/delete/:inv_id", checkAccountType, invController.buildDeleteInvento
 // Route to delete inventory
 router.post("/delete/", checkAccountType, invController.deleteInventory);
 
+// Route to add a review
+router.post("/detail/:inv_id/review", validate.reviewRules(), validate.checkReviewData, invController.handleAddReview);
+
 module.exports = router; // Export the router to be used in server.js
