@@ -229,4 +229,50 @@ validate.checkUpdateData = async (req, res, next) => {
   next();
 };
 
+/*  **********************************
+ *  Review Validation Rules
+ * ********************************* */
+validate.reviewRules = () => {
+  return [
+    // review_rating is required and must be an integer between 1 and 5
+    body("review_rating")
+      .trim()
+      .isInt({ min: 1, max: 5 })
+      .withMessage("Rating must be between 1 and 5."),
+    // review_text is required and must be string
+    body("review_text")
+      .trim()
+      .isLength({ min: 1, max: 500 })
+      .withMessage("Review text must be between 1 and 500 characters."),
+  ];
+};
+
+/* ******************************
+ * Check Review data and return errors or continue to controller
+ * ***************************** */
+validate.checkReviewData = async (req, res, next) => {
+  const { review_rating, review_text } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    const data = await invModel.getInventoryById(req.params.inv_id);
+    const detail = await utilities.buildDetailViewHtml(data);
+    const reviews = await invModel.getReviewsByInvId(req.params.inv_id);
+    const reviewsHtml = await utilities.buildReviewsHtml(reviews);
+    res.render("./inventory/detail", {
+      title: data[0].inv_make,
+      nav,
+      detail,
+      reviewsHtml,
+      errors,
+      review_rating,
+      review_text,
+      inv_id: req.params.inv_id,
+    });
+    return;
+  }
+  next();
+};
+
 module.exports = validate;

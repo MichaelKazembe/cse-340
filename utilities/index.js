@@ -143,7 +143,7 @@ Util.checkJWTToken = (req, res, next) => {
           return res.redirect("/account/login");
         }
         res.locals.accountData = accountData;
-        res.locals.loggedin = 1; 
+        res.locals.loggedin = 1;
         next();
       }
     );
@@ -169,18 +169,41 @@ Util.checkAccountType = (req, res, next) => {
   }
 };
 
-
 /* ****************************************
  *  Check Login
  * ************************************ */
- Util.checkLogin = (req, res, next) => {
+Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
-    next()
+    next();
   } else {
-    req.flash("notice", "Please log in.")
-    return res.redirect("/account/login")
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
   }
- }
+};
 
+/* ****************************************
+ *  Build the reviews HTML
+ * ************************************ */
+Util.buildReviewsHtml = async function (reviews) {
+  let reviewsHtml = "";
+  if (reviews && reviews.length > 0) {
+    reviews.forEach((review) => {
+      reviewsHtml += `
+        <div class="review">
+          <p><strong>${review.account_firstname} ${
+        review.account_lastname
+      }</strong> - Rating: ${review.review_rating}/5</p>
+          <p>${review.review_text}</p>
+          <p><small>${new Date(
+            review.review_date
+          ).toLocaleDateString()}</small></p>
+        </div>
+      `;
+    });
+  } else {
+    reviewsHtml = "<p>No reviews yet. Be the first to review this vehicle!</p>";
+  }
+  return reviewsHtml;
+};
 
 module.exports = Util;
